@@ -1,0 +1,337 @@
+.guide-container {
+    margin-top: 6rem;
+}
+
+.guide-header {
+    font-size: 45px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.guide-header :first-child {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--green-950);
+}
+
+.guide-header :last-child {
+    margin-top: -25px;
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+.carousel-container {
+    max-width: 1536px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    min-height: 80vh;
+    height: 80vh;
+}
+
+.Carousel {
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.carousel-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-container1 p, .text-container1 span, .text-container2 p, .text-container2 span {
+    text-align: left;
+}
+
+.text-container1 p, .text-container2 p, .slide3 p, .slide4 p {
+    color: white;
+    padding: 6px 14px;
+    background-color: var(--green-950);
+    border-radius: 16px;
+    width: fit-content;
+    margin-bottom: 5px;
+}
+
+.text-container1, .text-container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 0;
+    padding: 16px;
+    background-color: white;
+    border-radius: 20px;
+    color: var(--green-950);
+    height: fit-content;
+    max-width: 450px;
+}
+
+.text-container1 {
+    margin-right: -17%;
+    margin-top: -20%;
+}
+
+.slide1 img {
+    width: 600px;
+    height: 600px;
+}
+
+.slide2 img {
+    width: 500px;
+    height: 500px;
+}
+
+/* FOR THE GRID (STEP3) */
+
+.slide3, .slide4 {
+    padding: 20px 70px 60px 70px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: stretch;
+    justify-items: stretch;
+    min-height: 80vh;
+}
+
+.grid {
+    background-color: var(--custom-white);
+    color: var(--green-950);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-title {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.grid-title span {
+    font-size: 21px;
+}
+
+.UI-icon {
+    max-width: 180px;
+    max-height: 230px;
+    margin: 0 6% 0 2%;
+}
+
+.UI-icon-title {
+    max-width: 180px;
+    max-height: 230px;
+    margin: 0 2% 0 6%;
+}
+
+
+/*========IPADPRO==========*/
+@media only screen and (min-width: 835px) and (max-width: 1030px){
+    .guide-header :last-child {
+        margin-top: -20px;
+        font-size: 4rem;
+        font-weight: 600;
+    }
+    .carousel-container {
+        min-height: 70vh;
+        height: 70vh;
+        margin-top: 5%;
+    }
+    .text-container1 {
+        margin-right: -24%;
+        margin-left: 8%;
+        margin-top: -36%;
+    }
+    .text-container2 {
+        margin-left: -10.5%;
+        margin-right: 4%;
+        margin-top: -46%;
+    }
+    .slide2 img {
+        margin-top: -1%;
+        margin-right: -3%;
+    }
+    .slide3, .slide4 {
+        gap: 20px;
+        min-height: 60vh;
+        padding: 0 10px;
+        margin-top: -4%;
+    }
+    .grid {
+        flex-direction: column;
+        padding: 20px 40px;
+    }
+    .UI-icon {
+        max-width: 150px;
+        max-height: 210px;
+        margin: unset;
+        margin-bottom: 20px;
+    }
+    .UI-icon-title {
+        max-width: 150px;
+        max-height: 210px;
+        margin: unset;
+        margin-top: 20px;
+    }
+}
+
+
+ /*==========iPAD==========*/
+@media only screen and (min-width: 700px) and (max-width: 835px){
+    .guide-header :first-child {
+        font-size: 2rem;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .guide-header :last-child {
+        font-size: 4rem;
+        font-weight: 600;
+        line-height: 80px;
+    }
+    .carousel-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        min-height: 65vh;
+        height: 65vh;
+        margin-top: 5%;
+    }
+    .slide1, .slide2 {
+        flex-direction: column;
+        font-size: 95%;
+    }
+    .text-container1 {
+        margin-right: unset;
+        margin-top: unset;
+    }
+    .text-container1, .text-container2 {
+        max-width: 320px;
+    }
+    .slide1 img {
+        margin-top: -24%;
+        margin-right: -14%;
+    }
+    .text-container2 {
+        margin-top: -9.8%;
+    }
+    .slide2 img {
+        margin-top: -10%;
+    }
+    .slide1 img, .slide2 img {
+        width: 400px;
+        height: 400px;
+    }
+    .slide3, .slide4 {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        min-height: unset;
+        padding: 0 10px;
+        font-size: 95%;
+        margin-top: -4%;
+    }
+    .grid {
+        padding: 15px;
+    }
+    .grid-title span {
+        font-size: 120%;
+    }
+    .UI-icon {
+        max-width: 100px;
+        max-height: 160px;
+        margin: 0 5% 0 2%;
+    }
+    .UI-icon-title {
+        max-width: 100px;
+        max-height: 160px;
+        margin: 0 2% 0 5%;
+    }
+}
+
+
+/*========MOBILE==========*/
+@media only screen and (min-width: 370px) and (max-width: 700px) {
+    .guide-container {
+        margin-top: 1rem;
+    }
+    .guide-header :first-child {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    .guide-header :last-child {
+        font-size: 2rem;
+        font-weight: 600;
+        line-height: 40px;
+    }
+    .carousel-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        min-height: 65vh;
+        height: 65vh;
+    }
+    .Carousel {
+        padding: 0 20px;
+    }
+    .slide1, .slide2 {
+        flex-direction: column;
+        font-size: 80%;
+    }
+    .text-container1 {
+        margin-right: unset;
+        margin-top: unset;
+    }
+    .text-container1, .text-container2 {
+        max-width: 200px;
+    }
+    .slide1 img {
+        margin-top: -25%;
+        margin-right: -14%;
+    }
+    .text-container2 {
+        margin-top: -9.5%;
+    }
+    .slide2 img {
+        margin-top: -10%;
+    }
+    .slide1 img, .slide2 img {
+        width: 200px;
+        height: 200px;
+    }
+    .slide3, .slide4 {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        min-height: unset;
+        padding: 0 10px;
+        font-size: 80%;
+        min-height: 53vh;
+        max-height: 53vh;
+        overflow-y: auto;
+    }
+    .slide2, .slide3, .slide4 {
+        margin-top: -2%;
+    }
+    .grid {
+        padding: 10px;
+    }
+    .grid-title span {
+        font-size: 120%;
+    }
+    .UI-icon {
+        max-width: 80px;
+        max-height: 130px;
+        margin: 0 4% 0 2%;
+    }
+    .UI-icon-title {
+        max-width: 80px;
+        max-height: 130px;
+        margin: 0 1% 0 4%;
+    }
+}

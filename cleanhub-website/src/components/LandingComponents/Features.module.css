@@ -1,0 +1,150 @@
+.features-section {
+    margin: 2.5rem;
+    margin-top: 5rem;
+}
+
+.features-header {
+    font-size: 45px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.features-header :first-child {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--green-950);
+}
+
+.features-header :last-child {
+    margin-top: -25px;
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+/* FOR THE CARDS */
+
+.main-grid {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 2.5rem;
+}
+
+.col1, .col2, .col3 {
+    background-color: var(--custom-white);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.col2 {
+    transform: scale(1.1);
+}
+
+.col1 h2, .col3 h2 {
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-align: center;
+    color: black;
+    font-size: 1.5rem;
+}
+
+.col2 h2 {
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-align: center;
+    color: var(--green-600);
+    font-size: 2rem;
+}
+
+.col1 ul, .col2 ul, .col3 ul {
+    list-style: none;
+}
+
+.features-items {
+    color: black;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+}
+
+.FaCheck {
+    color: var(--green-600);
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+@media only screen and (min-width: 1290px) {
+    .main-grid {
+        column-gap: 4rem;
+    }
+}
+
+
+/*========IPADPRO==========*/
+@media only screen and (min-width: 835px) and (max-width: 1030px){
+    .features-header :last-child {
+        margin-top: -20px;
+        font-size: 4.5rem;
+        font-weight: 600;
+    }
+    .main-grid {
+        padding: 1.5rem;
+        grid-template-columns: 1fr;
+    }
+    .col2 {
+        transform: scale(1);
+    }
+}
+
+
+
+ /*==========iPAD==========*/
+@media only screen and (min-width: 700px) and (max-width: 835px){
+    .features-header :first-child {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--green-950);
+    }
+    .features-header :last-child {
+        font-size: 4rem;
+        font-weight: 600;
+    }
+    .main-grid {
+        padding: 1.5rem;
+        grid-template-columns: 1fr;
+    }
+    .col2 {
+        transform: scale(1);
+    }
+}
+
+
+/*========MOBILE==========*/
+@media only screen and (min-width: 370px) and (max-width: 700px){
+    .features-header :first-child {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .features-header :last-child {
+        margin-top: -10px;
+        font-size: 2rem;
+        font-weight: 600;
+        line-height: 40px;
+    }
+    .main-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        transform: scale(0.9);
+        margin-top: -10%;
+        font-size: 90%;
+    }
+}
+

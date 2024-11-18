@@ -1,0 +1,240 @@
+.overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(4, 37, 18, 0.4);
+    z-index: 0;
+    transition: transform 0.7s ease-out;
+}
+
+.overlay-slide-in {
+    transform: translateX(100%);
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.5rem 4rem;
+    min-height: 50vh;
+    margin-top: 15rem;
+    /* for overlay */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    /* background-color: rgb(4, 37, 18, 0.4); */
+}
+
+.earth-container {
+    flex: 1;
+    width: 80%;
+    height: 80vh;
+    margin-left: -10%;
+}
+
+.text-container {
+    flex: 1;
+    font-size: 1.2rem;
+    line-height: 2.25;
+    margin-left: -12%;
+    backdrop-filter: blur(14px);
+    /* border: 1px solid rgba(231, 228, 228, 0.4); */
+    /* box-shadow: 3px 3px 6px rgba(5, 143, 81, 0.2); */
+    padding: 1.5rem 2rem;
+    border-radius: 24px;
+}
+
+.worldwide {
+    font-size: 4.5rem;
+    font-weight: 700;
+    font-family: 'Oswald';
+    margin-left: 36px;
+    margin-right: 6px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+    line-height: 1;
+}
+
+.users-over {
+    font-weight: 600;
+}
+
+.users-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+    margin: 0 5px;
+}
+
+.homepage-last {
+    margin-top: 10rem;
+    padding: 4rem;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 2;
+    text-shadow: 7px 7px 14px rgba(0, 0, 0, 0.7);   
+}
+
+.letsBegin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.letsBegin-container :only-child {
+    padding: 1.25rem 2.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--custom-white);
+    background-color: var(--green-950);
+    color: white;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+
+
+
+/*========IPADPRO==========*/
+@media only screen and (min-width: 835px) and (max-width: 1030px) {
+
+    /* .main-container {
+        margin-top: 200px;
+        margin-bottom: 150px;
+    }
+    .earth-container {
+        margin-left: 0%;
+        position: absolute;
+    }
+    .text-container {
+        margin-left: 0;
+        font-size: 1.5rem;
+        line-height: 2.4;
+    } */
+    .main-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 4rem;
+    }
+    .earth-container {
+        width: 75%;
+        height: 75vh;
+        margin-left: unset;
+        display: absolute;
+        margin-top: -50px;
+    }
+    .text-container {
+        margin-left: unset;
+        font-size: 1.5rem;
+        line-height: 2.4;
+        margin-top: -90px;
+    }
+
+}
+
+
+
+/*==========iPAD==========*/
+@media only screen and (min-width: 700px) and (max-width: 835px) {
+
+    .main-container {
+        margin: 200px 0 150px;
+        padding: 12rem 4rem;
+    }
+
+    .earth-container {
+        width: 70%;
+        height: 70vh;
+        margin-left: -20%;
+        position: absolute;
+    }
+    
+    .text-container {
+        font-size: 1.20rem;
+        line-height: 2;
+        margin-left: 10%;
+        margin-right: -20%;
+        margin-top: 10%;
+        margin-bottom: -20%;
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        max-width: 450px;
+    }
+    .worldwide {
+        margin: 0;
+        margin-right: 6px;
+        font-weight: 600;
+        line-height: 1;
+    }
+
+    .users-over {
+        font-weight: 500;
+    }
+
+    .users-number {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0 2px;
+    }
+    .homepage-last {
+        margin-top: 0;
+        font-size: 30px;
+    }
+}
+
+
+/*==========MOBILE==========*/
+@media only screen and (min-width: 350px) and (max-width: 700px) {
+
+    .main-container {
+        margin-top: 10rem;
+        flex-direction: column;
+        padding: 0.5rem 0.5rem;
+        overflow: hidden;
+    }
+
+    .earth-container {
+        width: 50%;
+        height: 50vh;
+        margin-left: 54%;
+        display: absolute;
+        z-index: 2;
+    }
+
+    .text-container {
+        margin-left: unset;
+        font-size: 1rem;
+        line-height: 2;
+        padding: 1.5rem 2rem;
+        backdrop-filter: unset;
+        border-radius: none;
+        margin-top: -90px;
+        z-index: 2;
+    }
+
+    .worldwide {
+        font-size: 3rem;
+        display: block;
+        margin: unset;
+        margin-bottom: 30px;
+    }
+
+    .users-number {
+        font-size: 1.25rem;
+    }
+
+
+    .homepage-last {
+        margin-top: 5rem;
+        font-size: 20px;
+        padding: 2rem;
+    }
+    .letsBegin-container :only-child {
+        padding: 1rem 2.5rem;
+        font-size: medium;
+        font-weight: 500;
+    }
+}
