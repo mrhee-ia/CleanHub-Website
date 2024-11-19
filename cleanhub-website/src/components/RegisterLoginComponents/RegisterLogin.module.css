@@ -23,7 +23,7 @@
     overflow: hidden;
     width: 800px;
     max-width: 100%;
-    min-height: 500px;
+    min-height: 560px;
 }
 
 .container form {
@@ -226,6 +226,12 @@
     transform: scale(1.05);
 }
 
+.error-message {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+}
+
 
 
 /*==========iPAD==========*/
@@ -248,8 +254,8 @@
         min-height: 600px;
     }
     .form-container h1 {
-        line-height: 45px;
-        margin-bottom: 10px;
+        line-height: 42px;
+        margin-bottom: 6px;
     }
     .sign-in, .sign-up {
         width: 75%;
@@ -292,5 +298,13 @@
         color: var(--custom-white);
         box-shadow: unset;
         transform: scale(1);
+    }
+    .container input {
+        font-size: 12px;
+        margin: 5px 0;
+        padding: 8px 15px;
+    }
+    .error-message {
+        font-size: 10px;
     }
 }

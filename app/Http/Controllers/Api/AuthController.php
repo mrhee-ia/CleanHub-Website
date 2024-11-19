@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SigninRequest;
 use App\Http\Requests\SignupRequest;
 use Illuminate\Support\Facades\Auth;
-use http\Env\Response;
 
 class AuthController extends Controller
 {
@@ -31,7 +30,7 @@ class AuthController extends Controller
         $credentials = $request->validated();
         if (!Auth::attempt($credentials)) {
             return response([
-                'message' => 'Credentials are Incorrect'
+                'message' => 'Credentials are Incorrect.'
             ], 422);
         }
         /** @var \App\Models\User $user */

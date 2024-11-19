@@ -67,9 +67,7 @@ const RegisterLogin = () => {
             setToken(data.token)
         }).catch(err => {
             const response = err.response
-            if (response && response.status === 422) {
-                setErrors(response.data.errors)
-            }
+            if (response && response.status === 422) setErrors(response.data.errors)
         })
   }
 
@@ -87,9 +85,7 @@ const RegisterLogin = () => {
             setToken(data.token)
         }).catch((err) => {
             const response = err.response;
-            if (response && response.status === 422) {
-              setMessage(response.data.message)
-            }
+            if (response && response.status === 422) setMessage(response.data.message)
         })
   }
 
@@ -101,10 +97,14 @@ const RegisterLogin = () => {
                     <Link to='/'><img className={styles['logo']} src={logoImg} /></Link>
                     <h1>Create Your Account</h1>
                     <span>Start with registration to continue.</span>
-                    <input type="text" name="full-name" ref={fullNameRef} placeholder='Enter Name' required />
-                    <input type="text" name="user-name" ref={userNameRef} placeholder='Enter Username' required/>
-                    <input type="email" name="email" ref={emailRegRef} placeholder='Enter Email Address' required/>
-                    <input type="password" name="password" ref={passwordRegRef} placeholder='Enter Password' required/>
+                        <input type="text" name="full-name" ref={fullNameRef} placeholder='Enter Name' required />
+                        {errors?.["full_name"] && (<div className={styles["error-message"]}>{errors["full_name"]}</div>)}
+                        <input type="text" name="user-name" ref={userNameRef} placeholder='Enter Username' required/>
+                        {errors?.["user_name"] && (<div className={styles["error-message"]}>{errors["user_name"]}</div>)}
+                        <input type="email" name="email" ref={emailRegRef} placeholder='Enter Email Address' required/>
+                        {errors?.["email"] && (<div className={styles["error-message"]}>{errors["email"]}</div>)}
+                        <input type="password" name="password" ref={passwordRegRef} placeholder='Enter Password' required/>
+                        {errors?.["password"] && (<div className={styles["error-message"]}>{errors["password"].join(" ")}</div>)}
                     <button>SIGN UP</button>
                 </form>
             </div>
@@ -115,6 +115,7 @@ const RegisterLogin = () => {
                     <span>Log in your account to continue.</span>
                     <input type="email" name="email" ref={emailLoginRef} placeholder='Use Email' required/>
                     <input type="password" name="password" ref={passwordLoginRef} placeholder='Enter Password' required/>
+                    {message && (<div className={styles["error-message"]}>{message}</div>)}
                     <a href="#">Forgot Your Password?</a>
                     <button>SIGN IN</button>
                 </form>
