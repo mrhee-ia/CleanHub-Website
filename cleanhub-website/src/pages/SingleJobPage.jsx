@@ -1,4 +1,4 @@
-import styles from './Pages.module.css'
+import styles from './HomePages.module.css'
 import { Link } from 'react-router-dom'
 import { FaArrowLeft, FaBookmark } from 'react-icons/fa'
 import { useState } from 'react'

@@ -1,4 +1,4 @@
-import styles from './Pages.module.css'
+import styles from './HomePages.module.css'
 import PageTitle from '../components/HomeComponents/PageTitle'
 
 const SavedJobsPage = () => {
