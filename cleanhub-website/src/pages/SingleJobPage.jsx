@@ -1,14 +1,21 @@
 import styles from './Pages.module.css'
 import { Link } from 'react-router-dom'
 import { FaArrowLeft, FaBookmark } from 'react-icons/fa'
+import { useState } from 'react'
 
 const SingleJobPage = () => {
+
+
   return (
     <div className={styles["single-job-container"]}>
         <h1 className={styles["job-title"]}>Operation: Cleaning Program Towards Community Progress</h1>
         <h3 className={styles["job-category"]}>Community Cleanup</h3>
         <label>Description</label>
         <p className={styles["job-description"]}> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <label>Employer</label>
+        <p className={styles["job-employer"]}>Ma. Cristina Pasague</p>
+        <label>Employer's Contact</label>
+        <p className={styles["job-employer-contact"]}>deisaki@test.com</p>
         <label>Qualifications</label>
         <p className={styles["job-qualifications"]}>
             Minimum of 1 year in professional cleaning services.<br/>
