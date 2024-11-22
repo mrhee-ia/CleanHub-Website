@@ -1,6 +1,6 @@
-import Footer from "../components/LandingComponents/Footer"
+import Footer from "../../components/LandingComponents/Footer"
 import { useState } from 'react'
-import GoBackButton from '../components/LandingComponents/GoBackButton'
+import GoBackButton from '../../components/LandingComponents/GoBackButton'
 import styles from './About_Help.module.css'
 import { FaSearch } from 'react-icons/fa'
 

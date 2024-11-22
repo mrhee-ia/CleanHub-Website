@@ -7,7 +7,7 @@ const SingleJobPage = () => {
 
 
   return (
-    <div className={styles["single-job-container"]}>
+    <div className={`${styles["single-job-container"]} ${styles["container"]}`}>
         <h1 className={styles["job-title"]}>Operation: Cleaning Program Towards Community Progress</h1>
         <h3 className={styles["job-category"]}>Community Cleanup</h3>
         <label>Description</label>

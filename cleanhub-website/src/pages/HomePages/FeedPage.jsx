@@ -1,9 +1,31 @@
+import { useEffect, useState } from 'react'
+import axiosClient from "../../axios-client.js";
 import styles from './HomePages.module.css'
-import PageTitle from '../components/HomeComponents/PageTitle'
-import CardsContainer from '../components/HomeComponents/CardsContainer'
+import PageTitle from '../../components/HomeComponents/PageTitle'
+import CardsContainer from '../../components/HomeComponents/CardsContainer'
 import { FaSearch } from 'react-icons/fa'
 
 const FeedPage = () => {
+
+  const [jobs, setJobs] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect( () => {
+    getJobs();
+  }, [])
+
+  const getJobs = () => {
+    setLoading(true)
+    axiosClient.get('/jobs')
+      .then(({data}) => {
+        setLoading(false)
+        console.log(data)
+      })
+      .catch(() => {
+        setLoading(false)
+      })
+  }
+
   return (
     <>
       <div className={styles["header-section"]}>
@@ -30,7 +52,7 @@ const FeedPage = () => {
         </ul>
       </section>
       {/* <!-- Job Cards --> */}
-      <CardsContainer />
+      <CardsContainer jobs={jobs}/>
     </>
   )
 }

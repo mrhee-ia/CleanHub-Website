@@ -1,16 +1,17 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import DefaultLayout from "./layouts/defaultLayout";
-import LandingPage from "./pages/LandingPage"
-import AboutPage from "./pages/AboutPage"
-import HelpPage from "./pages/HelpPage"
-import RegisterLoginPage from "./pages/RegisterLoginPage"
-import FeedPage from "./pages/FeedPage"
-import ProfilePage from "./pages/ProfilePage"
-import SavedJobsPage from "./pages/SavedJobsPage";
-import JobApplicationsPage from "./pages/JobApplicationsPage"
-import JobPostsPage from "./pages/JobPostsPage"
-import NotificationsPage from "./pages/NotificationsPage"
-import SingleJobPage from "./pages/SingleJobPage";
+import LandingPage from "./pages/LandingPages/LandingPage"
+import AboutPage from "./pages/LandingPages/AboutPage"
+import HelpPage from "./pages/LandingPages/HelpPage"
+import RegisterLoginPage from "./pages/LandingPages/RegisterLoginPage"
+import FeedPage from "./pages/HomePages/FeedPage"
+import ProfilePage from "./pages/HomePages/ProfilePage"
+import SavedJobsPage from "./pages/HomePages/SavedJobsPage";
+import JobApplicationsPage from "./pages/HomePages/JobApplicationsPage"
+import JobPostsPage from "./pages/HomePages/JobPostsPage"
+import NotificationsPage from "./pages/HomePages/NotificationsPage"
+import SingleJobPage from "./pages/HomePages/SingleJobPage";
+import CreateJobPage from "./pages/HomePages/CreateJobPage"
 
 
 const router = createBrowserRouter([
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             {
                 path: '/hub/jobs/1',
                 element: <SingleJobPage />
+            },
+            {
+                path: '/hub/create-job',
+                element: <CreateJobPage />
             }
         ]
     },

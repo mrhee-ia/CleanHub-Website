@@ -88,16 +88,17 @@
 
 /* SINGLE JOB PAGE */
 
-.single-job-container {
+.container {
     background-color: var(--custom-white);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     overflow-y: auto;
     margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
-.job-title {
+.job-title, .page-title {
     font-size: x-large;
     font-weight: 800;
     letter-spacing: 1px;
@@ -163,7 +164,7 @@
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    margin: 10px 0 20px;
+    margin: 10px 0;
 }
 
 .back-btn, .save-btn {
@@ -185,7 +186,6 @@
 .applyNow-btn {
     color: var(--custom-white);
     background-color: var(--green-900);
-    /* box-shadow: 2px 2px 10px 0 var(--green-800); */
     padding: 1rem;
     border-radius: 16px;
     font-size: large;
@@ -206,7 +206,7 @@
     width: 100%;
 }
 
-.post-bar-section button {
+.post-bar-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -216,14 +216,91 @@
     transition: transform 0.1s ease-in-out;
 }
 
-.post-bar-section button :first-child {
+.post-bar-button :first-child, .post-form label :first-child {
     margin-right: 6px;
 }
 
-.post-bar-section button:hover {
+.post-bar-button:hover {
     transform: scale(1.10);
     background-color: var(--custom-white);
     color: var(--green-800);
     box-shadow: 3px 3px 5px rgba(4, 37, 18, 0.6);
 }
+
+
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.post-form label:not(.file-input-label) {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+.post-form label :first-child {
+    font-size: small;
+    margin-top: -2px;
+    color: rgba(4, 37, 18, 0.8);
+}
+
+.post-form input, .post-form select, .post-form textarea, .file-input-label {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--green-900);
+    border-radius: 10px;
+    background-color: var(--custom-white);
+}
+
+.file-input {
+    display: none;
+}
+
+.file-input-label {
+    display: inline-block;
+    color: rgb(128, 128, 128);
+}
+
+.post-form div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 1.5rem 0 1rem;
+    gap: 2rem;
+    font-size: 1.25rem;
+}
+
+.cancel-btn {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    color: var(--green-950);
+    border: 1px solid var(--green-900);
+    border-radius: 12px;
+}
+
+.post-form div button {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background-color: var(--green-900);
+    color: var(--custom-white);
+    border-radius: 12px;
+}
+
+.cancel-btn:hover, .post-form div button:hover {
+    box-shadow: 6px 6px 10px rgba(4, 37, 18, 0.5);
+}
+
+
 

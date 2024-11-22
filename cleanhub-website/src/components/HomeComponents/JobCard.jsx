@@ -2,7 +2,11 @@ import { Link } from 'react-router-dom'
 import styles from './Cards.module.css'
 import { FaBookmark, FaGlobeAmericas, FaRegMoneyBillAlt } from 'react-icons/fa'
 
-const JobCard = () => {
+const JobCard = ({job}) => {
+
+    // let title = job.title
+    // title = title.substring(0, 60) + '...'
+
   return (
     <div className={styles["jobcard"]}>
         <div>

@@ -1,5 +1,5 @@
 import styles from './HomePages.module.css'
-import PageTitle from '../components/HomeComponents/PageTitle'
+import PageTitle from '../../components/HomeComponents/PageTitle'
 
 const JobApplicationsPage = () => {
   return (

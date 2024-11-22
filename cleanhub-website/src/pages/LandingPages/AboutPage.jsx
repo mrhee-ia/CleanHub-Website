@@ -1,7 +1,7 @@
-import Footer from "../components/LandingComponents/Footer"
+import Footer from "../../components/LandingComponents/Footer"
 import styles from './About_Help.module.css'
-import GoBackButton from '../components/LandingComponents/GoBackButton'
-import profilePic3 from '../assets/images/profilePic3.avif'
+import GoBackButton from '../../components/LandingComponents/GoBackButton'
+import profilePic3 from '../../assets/images/profilePic3.avif'
 import { FaEye, FaFlag, FaMedal  } from 'react-icons/fa'
 
 const AboutPage = () => {

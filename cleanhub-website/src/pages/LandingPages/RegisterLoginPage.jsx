@@ -1,9 +1,9 @@
 import {motion} from 'framer-motion'
-import StarsCanvas from '../components/LandingComponents/StarsCanvas.jsx';
-import RegisterLogin from "../components/RegisterLoginComponents/RegisterLogin.jsx"
+import StarsCanvas from '../../components/LandingComponents/StarsCanvas.jsx';
+import RegisterLogin from "../../components/RegisterLoginComponents/RegisterLogin.jsx"
 
 import {Navigate} from "react-router-dom";
-import {useStateContext} from "../context/ContextProvider.jsx"
+import {useStateContext} from "../../context/ContextProvider.jsx"
 
 const slideIn = (direction, type, delay, duration) => {
   return {

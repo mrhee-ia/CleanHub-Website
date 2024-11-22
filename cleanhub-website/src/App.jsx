@@ -4,10 +4,10 @@ import {
   createRoutesFromElements,
   RouterProvider
 } from 'react-router-dom'
-import LandingPage from "./pages/LandingPage"
-import AboutPage from "./pages/AboutPage"
-import HelpPage from "./pages/HelpPage"
-import RegisterLoginPage from "./pages/RegisterLoginPage"
+import LandingPage from "./pages/LandingPages/LandingPage"
+import AboutPage from "./pages/LandingPages/AboutPage"
+import HelpPage from "./pages/LandingPages/HelpPage"
+import RegisterLoginPage from "./pages/LandingPages/RegisterLoginPage"
 
 
 const App = () => {
