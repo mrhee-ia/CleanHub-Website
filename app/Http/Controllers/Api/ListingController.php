@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ListingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all jobs.
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -16,8 +18,19 @@ class ListingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+     * Display the specified job.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $job = Job::with('user')->findOrFail($id);
+        $job->media_paths = json_decode($job->media_paths);
+        return response()->json($job);
+    }
+
+    /**
+     * Show the form for creating a new job.
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -26,30 +39,44 @@ class ListingController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * Store a newly created job in database.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:225',
+            'category' => 'required',
+            'description' => 'required',
+            'qualifications' => 'required',
+            'city_id' => 'required',
+            'full_address' => 'required',
+            'schedule' => 'required',
+            'payment' => 'required',
+            'media_paths.*' => 'required|file|mimes:jpg,jpeg,png|max:25600',
+        ]);
+
+        $mediaPaths = [];
+        if ($request->hasFile('media_paths')) {
+            foreach ($request->file('media_paths') as $file) {
+                $mediaPaths[] = $file->store('uploads/jobs', 'public');
+            }
+        }
+
+        $data = $request->all();
+        $data['media_paths'] = json_encode($mediaPaths);
+        $data['user_id'] = auth()->id();
+
+        $job = Job::create($data);
+
+        return response()->json([
+            'job' => $job
+        ], 201);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
+     * Show the form for editing the specified job.
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -59,8 +86,7 @@ class ListingController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * Update the specified job in database.
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -72,7 +98,6 @@ class ListingController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

@@ -10,21 +10,21 @@ const FeedPage = () => {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(false)
 
-  useEffect( () => {
-    getJobs();
-  }, [])
+  // useEffect( () => {
+  //   getJobs();
+  // }, [])
 
-  const getJobs = () => {
-    setLoading(true)
-    axiosClient.get('/jobs')
-      .then(({data}) => {
-        setLoading(false)
-        console.log(data)
-      })
-      .catch(() => {
-        setLoading(false)
-      })
-  }
+  // const getJobs = () => {
+  //   setLoading(true)
+  //   axiosClient.get('/jobs')
+  //     .then(({data}) => {
+  //       setLoading(false)
+  //       console.log(data)
+  //     })
+  //     .catch(() => {
+  //       setLoading(false)
+  //     })
+  // }
 
   return (
     <>
@@ -47,8 +47,8 @@ const FeedPage = () => {
           <li><a href="/category/home">Home Cleanup</a></li>
           <li><a href="/category/vacation-home">Vacation Home Cleanup</a></li>
           <li><a href="/category/office">Office Cleanup</a></li>
-          <li><a href="/category/garden">Garden Cleanup</a></li>
           <li><a href="/category/community">Community Cleanup</a></li>
+          <li><a href="/category/other">Other Cleanup</a></li>
         </ul>
       </section>
       {/* <!-- Job Cards --> */}

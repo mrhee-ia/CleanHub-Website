@@ -1,61 +1,77 @@
+import { useEffect, useState } from 'react'
+import axiosClient from "../../axios-client.js";
 import styles from './HomePages.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { FaArrowLeft, FaBookmark } from 'react-icons/fa'
-import { useState } from 'react'
 
 const SingleJobPage = () => {
 
+    const [job, setJob] = useState(null);
+    const [loading, setLoading] = useState(true); // to prevent accessing null value when the job is not yet loaded
+    const { jobId } = useParams(); // job ID is passed as a URL parameter
+
+    const testId = 1;
+    useEffect( () => {
+        setLoading(true);
+        axiosClient.get(`/jobs/${testId}`)
+        .then( (response) => {
+            setJob(response.data);
+        }).catch((error) => {
+            console.error('There was an error fetching the job data:', error);
+        }).finally(() => {
+            setLoading(false);
+        });
+    }, [jobId])
+
+    if (loading) {
+        return <h1 style={{margin:'20px', color:'white', fontSize:'1.5rem', fontWeight:'600'}}>Loading...</h1>;
+    }
 
   return (
     <div className={`${styles["single-job-container"]} ${styles["container"]}`}>
-        <h1 className={styles["job-title"]}>Operation: Cleaning Program Towards Community Progress</h1>
-        <h3 className={styles["job-category"]}>Community Cleanup</h3>
+        <h1 className={styles["job-title"]}>{job.title}</h1>
+        <h3 className={styles["job-category"]}>{job.category}</h3>
         <label>Description</label>
-        <p className={styles["job-description"]}> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p className={styles["job-description"]} style={{ whiteSpace: 'pre-line' }}>{job.description}</p>
         <label>Employer</label>
-        <p className={styles["job-employer"]}>Ma. Cristina Pasague</p>
+        <p className={styles["job-employer"]}>{job.user.full_name}</p>
         <label>Employer's Contact</label>
-        <p className={styles["job-employer-contact"]}>deisaki@test.com</p>
+        <p className={styles["job-employer-contact"]}>{job.user.email}</p>
         <label>Qualifications</label>
-        <p className={styles["job-qualifications"]}>
-            Minimum of 1 year in professional cleaning services.<br/>
-            Familiarity with handling cleaning equipment and products.<br/>
-            High school diploma or equivalent.<br/>
-            Strong attention to detail and commitment to cleanliness.<br/>
-            Ability to lift and carry up to 30 lbs.<br/>
-            Capability to stand, bend, and kneel for extended periods.<br/>
-            Reliable and punctual with a professional demeanor.<br/>
-            Able to work as part of a team.
-        </p>
+        <p className={styles["job-qualifications"]} style={{ whiteSpace: 'pre-line' }}>{job.qualifications}</p>
         <div className={styles["job-details"]}>
             <div>
                 <label>Location</label>
-                <p className={styles["job-location"]}>Block 123 Main Street, Brgy. Sample, Cityville</p>
+                <p className={styles["job-location"]}>{job.full_address}</p>
             </div>
             {/* <div className={styles["bar"]}></div> */}
             <div>
                 <label>Schedule</label>
-                <p className={styles["job-schedule"]}>November 27, 2024 2:00 PM - 5:00 PM</p>
+                <p className={styles["job-schedule"]}>{job.schedule}</p>
             </div>
             {/* <div className={styles["bar"]}></div> */}
             <div>
                 <label>Payment</label>
-                <p className={styles["job-payment"]}>$200/hour</p>
+                <p className={styles["job-payment"]}>{job.payment}</p>
             </div>
         </div>
 
         <div className={styles["job-media"]}>
             <h3>Gallery</h3>
             <div className={styles["media"]}>
-                <img src="https://mangotiger.com/wp-content/uploads/2020/05/IMG_8423-1024x768.jpg"/>
-                <img src="https://i.natgeofe.com/k/3519980b-ba58-456d-b691-2ed516c223e0/clean-it-up-textimage_3x2.jpg"/>
-                <img src="https://isfcambodia.org/wp-content/uploads/2021/11/LSP-Cleanup-Crop.png"/>
-                <img src="https://ruh.ac.lk/images/beachclean/DSC07819.JPG"/>
-                <img src="https://pearlprotectors.org/wp-content/uploads/2022/06/35050495_200986497392815_8720043887428632576_n.jpg"/>
-                <img src="https://www.manipal.edu/content/dam/manipal/mu/mcon/Images/news_images/IMG-20191005-WA0015.jpg"/>
-                <img src="https://isfcambodia.org/wp-content/uploads/2021/11/LSP-Cleanup-Crop.png"/>
+                {
+                    job.media_paths.map( (path, index) => (
+                        <img 
+                            key={index}
+                            src={`${import.meta.env.VITE_API_BASE_URL}/storage/${path}`}
+                            alt={`Job Media ${index + 1}`}
+                            className={styles["job-image"]}
+                        />
+                    ))
+                }
             </div>
         </div>
+
         {/* <!-- Action Buttons --> */}
         <h3>Actions</h3>
         <div className={styles["btn-group"]}>
