@@ -21,10 +21,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::get('/jobs/{id}', [ListingController::class, 'show']);
     Route::post('/jobs/store', [ListingController::class, 'store']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/signin', [AuthController::class, 'signin']);
+
+
+Route::get('/jobs', [ListingController::class, 'index']);
+Route::get('/jobs/{id}', [ListingController::class, 'show']);
+

@@ -6,14 +6,13 @@ import { FaArrowLeft, FaBookmark } from 'react-icons/fa'
 
 const SingleJobPage = () => {
 
+    const { jobId } = useParams(); // retrieve jobId that was passed from URL
     const [job, setJob] = useState(null);
     const [loading, setLoading] = useState(true); // to prevent accessing null value when the job is not yet loaded
-    const { jobId } = useParams(); // job ID is passed as a URL parameter
 
-    const testId = 1;
     useEffect( () => {
         setLoading(true);
-        axiosClient.get(`/jobs/${testId}`)
+        axiosClient.get(`/jobs/${jobId}`)
         .then( (response) => {
             setJob(response.data);
         }).catch((error) => {
@@ -44,18 +43,15 @@ const SingleJobPage = () => {
                 <label>Location</label>
                 <p className={styles["job-location"]}>{job.full_address}</p>
             </div>
-            {/* <div className={styles["bar"]}></div> */}
             <div>
                 <label>Schedule</label>
                 <p className={styles["job-schedule"]}>{job.schedule}</p>
             </div>
-            {/* <div className={styles["bar"]}></div> */}
             <div>
                 <label>Payment</label>
                 <p className={styles["job-payment"]}>{job.payment}</p>
             </div>
         </div>
-
         <div className={styles["job-media"]}>
             <h3>Gallery</h3>
             <div className={styles["media"]}>

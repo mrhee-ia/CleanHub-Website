@@ -48,7 +48,7 @@ const router = createBrowserRouter([
                 element: <NotificationsPage />
             },
             {
-                path: '/hub/jobs/1',
+                path: '/hub/jobs/:jobId',
                 element: <SingleJobPage />
             },
             {

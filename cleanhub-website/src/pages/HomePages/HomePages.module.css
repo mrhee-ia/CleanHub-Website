@@ -73,7 +73,7 @@
     border-radius: 50px;
 }
 
-.job-categories-section ul li a {
+.job-categories-section ul li button {
     color: black;
 }
 
@@ -82,7 +82,7 @@
     box-shadow: 0 2px 5px rgba(221, 219, 219, 0.4);
 }
 
-.job-categories-section ul li:hover a {
+.job-categories-section ul li:hover button {
     color: white;
 }
 
@@ -266,6 +266,11 @@
 .file-input-label {
     display: inline-block;
     color: rgb(128, 128, 128);
+}
+
+.file-name {
+    font-size: 16px;
+    text-align: center;
 }
 
 .post-form div {

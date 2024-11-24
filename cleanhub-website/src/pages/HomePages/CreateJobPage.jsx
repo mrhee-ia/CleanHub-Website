@@ -18,12 +18,13 @@ import {
 
 const CreateJobPage = () => {
 
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     category: '',
     description: '',
     qualifications: '',
-    city_id: '1701668',
+    city_id: 'Manila, PH',
     full_address: '',
     schedule: '',
     payment: '',
@@ -39,6 +40,11 @@ const CreateJobPage = () => {
     }))
   }
 
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files); // Convert File list to Array
+    setSelectedFiles(files);
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault()
     const payload = new FormData();
@@ -51,8 +57,7 @@ const CreateJobPage = () => {
     payload.append('schedule', formData.schedule);
     payload.append('payment', formData.payment);
 
-    const files = Array.from(mediaRef.current.files);
-    files.forEach((file) => {
+    selectedFiles.forEach((file) => {
       payload.append('media_paths[]', file);
     });
 
@@ -99,7 +104,7 @@ const CreateJobPage = () => {
         <label><FaGlobeAmericas />Location (City, Country)</label>
         <select name='city_id' value={formData.city_id} onChange={handleChange}>
           {cities.map((city) => (
-            <option key={city.id} value={city.id}>
+            <option key={city.id} value={`${city.name}, ${city.country}`}>
               {`${city.name}, ${city.country}`}
             </option>
           ))}
@@ -113,8 +118,15 @@ const CreateJobPage = () => {
         <label htmlFor="jobPayment"><FaCamera />Upload Media</label>
         <label className={styles["file-input-label"]}>
           Click here to choose files
-          <input type="file" name="media" ref={mediaRef} accept="image/*" multiple className={styles["file-input"]} />
+          <input type="file" name="media" ref={mediaRef} accept="image/*" multiple className={styles["file-input"]} onChange={handleFileChange}/>
         </label>
+        {selectedFiles.length > 0 && (
+          <ul>
+            {selectedFiles.map((file, index) => (
+              <li className={styles['file-name']} key={index}>{file.name}</li>
+            ))}
+          </ul>
+        )}
         <div>
           <Link to='/hub/job-posts' className={styles["cancel-btn"]}><FaTimes />Cancel</Link>
           <button type="submit" name='post-job-btn'>Post Job</button>

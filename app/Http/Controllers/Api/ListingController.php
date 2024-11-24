@@ -12,9 +12,21 @@ class ListingController extends Controller
      * Display all jobs.
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $category = $request->query('category', 'All');
+        
+        if ($category == 'All') {
+            $jobs = Job::where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        } else {
+            $jobs = Job::where('category', $category)
+            ->where('status', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
+        return response()->json($jobs);
     }
 
     /**
