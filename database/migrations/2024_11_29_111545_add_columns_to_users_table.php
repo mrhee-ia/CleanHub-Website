@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            $table->boolean('application_status')->default(true)->change();   
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('bio')->nullable();
+            $table->json('saved')->nullable();
+            $table->json('applications')->nullable();
         });
     }
 
@@ -25,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -97,3 +97,86 @@
     color: var(--green-600);
     font-size: large;
 }
+
+
+
+
+/* ----------------Lists------------------------ */
+
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow-y: auto;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 1rem 0.5rem;
+}
+
+.listcard > div {
+    margin-bottom: 0.4rem;
+}
+
+.list-job-status {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-job-status :first-child {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.4rem;
+}
+
+.status-open {
+    color: var(--green-800);
+    background-color: rgba(36, 163, 75, 0.2);
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+}
+
+.status-closed {
+    color: #DC143C;
+    background-color: rgba(163, 36, 36, 0.2);
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+}
+
+.status-pending {
+    color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.list-job-info span {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.list-card-actions {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.list-card-actions > * {
+    font-size: 12px;
+    border: 1px solid var(--green-900);
+    color: var(--green-950);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+}
+
+.list-card-actions > *:hover {
+    box-shadow: 3px 3px 5px rgba(4, 37, 18, 0.5);
+}
+
+
+

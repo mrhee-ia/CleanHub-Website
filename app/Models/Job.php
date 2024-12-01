@@ -20,10 +20,12 @@ class Job extends Model
         'schedule',
         'payment',
         'media_paths',
+        'applicants'
     ];
 
     protected $casts = [
         'media_paths' => 'array',
+        'applicants' => 'array',
     ];
 
     public function user()

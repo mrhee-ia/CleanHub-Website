@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import {useStateContext} from "../../context/ContextProvider.jsx"
 import axiosClient from "../../axios-client.js";
 import styles from './HomePages.module.css'
 import { Link, useParams } from 'react-router-dom'
@@ -8,6 +9,7 @@ const SingleJobPage = () => {
 
     const { jobId } = useParams(); // retrieve jobId that was passed from URL
     const [job, setJob] = useState(null);
+    const {currentUser, setUser} = useStateContext();
     const [loading, setLoading] = useState(true); // to prevent accessing null value when the job is not yet loaded
 
     useEffect( () => {
@@ -20,7 +22,13 @@ const SingleJobPage = () => {
         }).finally(() => {
             setLoading(false);
         });
+        axiosClient.get('/user')
+        .then(({data}) => {
+          setUser(data)
+        })
     }, [jobId])
+
+    const isJobOwner = currentUser && job && currentUser.id === job.user.id;
 
     if (loading) {
         return <h1 style={{margin:'20px', color:'white', fontSize:'1.5rem', fontWeight:'600'}}>Loading...</h1>;
@@ -72,7 +80,17 @@ const SingleJobPage = () => {
         <h3>Actions</h3>
         <div className={styles["btn-group"]}>
             <Link to="/hub/feed" className={styles["back-btn"]}><FaArrowLeft/></Link>
-            <button className={styles["applyNow-btn"]}>Click Here to Apply Now!</button>
+            {isJobOwner ? 
+                (
+                job.application_status ? 
+                    <button className={styles["applyNow-btn"]}>Click Here to Close Application</button> : null
+                ) : 
+                (
+                <button className={styles["applyNow-btn"]}>
+                    {job.application_status ? "Click Here to Apply Now" : "Application Closed"}
+                </button>
+                ) 
+            }
             <button className={styles["save-btn"]}><FaBookmark/></button>
         </div>
     </div>

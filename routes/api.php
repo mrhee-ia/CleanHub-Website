@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::get('/jobs/user-posts', [ListingController::class, 'manage_posts']);
     Route::post('/jobs/store', [ListingController::class, 'store']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

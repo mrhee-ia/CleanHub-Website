@@ -46,7 +46,7 @@ const FeedPage = () => {
         <h3>Categories</h3>
         <ul>
           {categories.map( (cat) => (
-            <li><button key={cat} onClick={()=>handleChangeCategory(cat)}>{cat}</button></li>
+            <li key={cat}><button onClick={()=>handleChangeCategory(cat)}>{cat}</button></li>
           ) )}
         </ul>
       </section>

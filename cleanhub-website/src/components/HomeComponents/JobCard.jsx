@@ -10,7 +10,7 @@ const JobCard = React.forwardRef(({ job, maxHeight }, ref) => {
   return (
     <div className={styles["jobcard"]}>
         <div>
-            <div className={styles['card-details']} ref={ref}  style={{ height: maxHeight }} >
+            <div className={styles['card-details']} ref={ref} style={{ height: maxHeight }} >
                 <div>
                     <small className={styles['card-category']}>{job.category}</small>
                 </div>

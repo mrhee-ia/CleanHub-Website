@@ -17,12 +17,14 @@ class ListingController extends Controller
         $category = $request->query('category', 'All');
         
         if ($category == 'All') {
-            $jobs = Job::where('status', 1)
+            $jobs = Job::where('application_status', 1)
+            ->where('approved_status', 1)
             ->orderBy('created_at', 'desc')
             ->get();
         } else {
             $jobs = Job::where('category', $category)
-            ->where('status', 1)
+            ->where('approved_status', 1)
+            ->where('application_status', 1)
             ->orderBy('created_at', 'desc')
             ->get();
         }
@@ -106,6 +108,12 @@ class ListingController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function manage_posts() {
+        $user = auth()->user();
+        $jobs = Job::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        return response()->json($jobs);
     }
 
     /**

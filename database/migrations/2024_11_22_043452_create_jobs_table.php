@@ -23,8 +23,6 @@ return new class extends Migration
             $table->string('full_address');
             $table->string('schedule');
             $table->decimal('payment', 10, 2);
-            // $table->string('employer_name'); // Optional: remove if always derived from user
-            // $table->string('employer_contact'); // Optional: remove if always derived from user
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Reference to users table
             $table->json('media_paths');
             $table->timestamps();

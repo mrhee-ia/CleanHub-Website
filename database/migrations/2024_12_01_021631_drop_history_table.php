@@ -13,9 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('jobs', function (Blueprint $table) {
-            $table->boolean('application_status')->default(true)->change();   
-        });
+        Schema::dropIfExists('history');
     }
 
     /**

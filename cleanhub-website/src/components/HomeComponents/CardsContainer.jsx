@@ -8,9 +8,11 @@ const CardsContainer = ({jobs}) => {
   const [maxHeight, setMaxHeight] = useState(0);
 
   useEffect( () => {
+    console.log('bmax: ', maxHeight)
     const heights = cardDetailsRefs.current.map((ref) => ref?.offsetHeight || 0);
     const max = Math.max(...heights);
     setMaxHeight(max);
+    console.log('amax: ', maxHeight)
   }, [jobs])
   
   return (
