@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 import axiosClient from "../../axios-client.js";
 import styles from './HomePages.module.css'
 import cities from '../../cities.json';
@@ -65,7 +66,8 @@ const CreateJobPage = () => {
     axiosClient.post('/jobs/store', payload, {
       headers: { 'Content-Type': 'multipart/form-data' }
     }).then((response) => {
-      console.log('Job posted successfully:', response.data);
+      toast.success(response.message);
+      console.log(response.message);
       navigate('/hub/job-posts');
     }).catch((error) => {
       console.error('Error posting job:', error.response?.data || error.message);

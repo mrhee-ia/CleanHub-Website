@@ -30,7 +30,7 @@ const JobPostsPage = () => {
           </div>
         </section>
       </div>
-      <ListsContainer jobs={jobs}/>
+      <ListsContainer jobs={jobs} posts={true}/>
     </>  
   )
 }

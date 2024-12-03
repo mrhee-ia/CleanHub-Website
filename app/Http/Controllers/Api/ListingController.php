@@ -85,6 +85,7 @@ class ListingController extends Controller
         $job = Job::create($data);
 
         return response()->json([
+            'message' => 'Job posted successfully',
             'job' => $job
         ], 201);
     }
@@ -107,7 +108,24 @@ class ListingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'application_status' => 'required|boolean',
+        ]);
+
+        $job = Job::find($id);
+
+        // Check if the authenticated user is the job owner
+        if (auth()->id() !== $job->user_id) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $job->application_status = $validated['application_status'];
+        $job->save();
+
+        return response()->json([
+            'message' => 'Application status updated successfully',
+            'job' => $job,
+        ], 200);
     }
 
     public function manage_posts() {

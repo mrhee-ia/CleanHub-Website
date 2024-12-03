@@ -20,16 +20,20 @@ class Job extends Model
         'schedule',
         'payment',
         'media_paths',
-        'applicants'
+        'application_status',
     ];
 
     protected $casts = [
         'media_paths' => 'array',
-        'applicants' => 'array',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function applicants()
+    {
+        return $this->belongsToMany(User::class, 'job_applicants', 'job_id', 'applicant_id');
     }
 }

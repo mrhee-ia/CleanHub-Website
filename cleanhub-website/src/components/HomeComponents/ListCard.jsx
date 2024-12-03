@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import styles from './Cards.module.css'
-import { FaHourglassHalf, FaEnvelope, FaEnvelopeOpen } from "react-icons/fa"
+import { FaHourglassHalf } from "react-icons/fa"
 
 const formatDateTime = (dateString) => {
   const options = {
@@ -16,6 +16,7 @@ const formatDateTime = (dateString) => {
 
 const ListCard = ({job}) => {
 
+  // const isJobOwner = currentUser && job && currentUser.id === job.user.id;
   const truncatedTitle = job.title.length > 60 ? job.title.substring(0, 60) + '...' : job.title;
 
   return (

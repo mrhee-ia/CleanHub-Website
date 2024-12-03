@@ -23,6 +23,10 @@ class User extends Authenticatable
         'profile_picture',
         'email',
         'password',
+        'location',
+        'bio',
+        'saved',
+        'applications',
     ];
 
     /**
@@ -43,4 +47,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function appliedJobs()
+    {
+        return $this->belongsToMany(Job::class, 'job_applicants', 'applicant_id', 'job_id');
+    }
 }

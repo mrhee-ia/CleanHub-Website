@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ListingController;
+use App\Http\Controllers\Api\JobApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::get('/jobs/user-posts', [ListingController::class, 'manage_posts']);
     Route::post('/jobs/store', [ListingController::class, 'store']);
+    Route::get('/jobs/user-posts', [ListingController::class, 'manage_posts']);
+    Route::put('/jobs/{id}/update', [ListingController::class, 'update']);
+    Route::post('/jobs/{id}/apply', [JobApplicationController::class, 'apply_job']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 

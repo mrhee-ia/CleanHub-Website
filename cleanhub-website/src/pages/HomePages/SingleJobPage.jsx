@@ -11,6 +11,7 @@ const SingleJobPage = () => {
     const [job, setJob] = useState(null);
     const {currentUser, setUser} = useStateContext();
     const [loading, setLoading] = useState(true); // to prevent accessing null value when the job is not yet loaded
+    const [hasApplied, setHasApplied] = useState(false);
 
     useEffect( () => {
         setLoading(true);
@@ -29,6 +30,27 @@ const SingleJobPage = () => {
     }, [jobId])
 
     const isJobOwner = currentUser && job && currentUser.id === job.user.id;
+
+    const handleCloseApplication = () => {
+        axiosClient.put(`/jobs/${jobId}/update`, { application_status: false })
+            .then((response) => {
+                setJob({ ...job, application_status: false });
+                console.log(response)
+            })
+            .catch((error) => {
+                console.error("Error updating application status:", error);
+            });
+    }
+
+    const handleApplyNow = () => {
+        axiosClient.post(`/jobs/${jobId}/apply`)
+            .then((response) => {
+                console.log(response.data.message)
+            }).catch((error) => {
+                console.error("Error applying for the job:", error);
+                alert(error.response?.data?.message || "An error occurred while applying for the job.");
+            });
+    }
 
     if (loading) {
         return <h1 style={{margin:'20px', color:'white', fontSize:'1.5rem', fontWeight:'600'}}>Loading...</h1>;
@@ -82,12 +104,14 @@ const SingleJobPage = () => {
             <Link to="/hub/feed" className={styles["back-btn"]}><FaArrowLeft/></Link>
             {isJobOwner ? 
                 (
-                job.application_status ? 
-                    <button className={styles["applyNow-btn"]}>Click Here to Close Application</button> : null
+                job.application_status && job.approved_status ? 
+                    <button className={styles["applyNow-btn"]} onClick={handleCloseApplication}>Click Here to Close Application</button> : null
                 ) : 
                 (
-                <button className={styles["applyNow-btn"]}>
-                    {job.application_status ? "Click Here to Apply Now" : "Application Closed"}
+                <button className={styles["applyNow-btn"]} 
+                    style={job.application_status ? {display:'unset'} : {display:'none'} }
+                    onClick={handleApplyNow}
+                    >Click Here to Apply Now
                 </button>
                 ) 
             }
