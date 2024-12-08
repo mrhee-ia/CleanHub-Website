@@ -3,7 +3,7 @@ import {useStateContext} from "../../context/ContextProvider.jsx"
 import axiosClient from "../../axios-client.js";
 import styles from './HomePages.module.css'
 import { Link, useParams } from 'react-router-dom'
-import { FaArrowLeft, FaBookmark } from 'react-icons/fa'
+import { FaArrowLeft, FaBookmark, FaRegBookmark } from 'react-icons/fa'
 
 const SingleJobPage = () => {
 
@@ -11,23 +11,61 @@ const SingleJobPage = () => {
     const [job, setJob] = useState(null);
     const {currentUser, setUser} = useStateContext();
     const [loading, setLoading] = useState(true); // to prevent accessing null value when the job is not yet loaded
-    const [hasApplied, setHasApplied] = useState(false);
+    const [isSaved, setIsSaved] = useState(false);
 
-    useEffect( () => {
-        setLoading(true);
-        axiosClient.get(`/jobs/${jobId}`)
-        .then( (response) => {
-            setJob(response.data);
-        }).catch((error) => {
-            console.error('There was an error fetching the job data:', error);
-        }).finally(() => {
-            setLoading(false);
-        });
-        axiosClient.get('/user')
-        .then(({data}) => {
-          setUser(data)
-        })
-    }, [jobId])
+    useEffect(() => {
+        const fetchJobDetails = async () => {
+            try {
+                setLoading(true);
+                const response = await axiosClient.get(`/jobs/${jobId}`);
+                setJob(response.data);
+            } catch (error) {
+                console.error('Error fetching the job data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchJobDetails();
+    }, [jobId]);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const { data } = await axiosClient.get('/user');
+                setUser(data);
+    
+                // Check if the job is saved
+                const savedJobs = Array.isArray(data.saved)
+                    ? data.saved
+                    : JSON.parse(data.saved || '[]');
+                setIsSaved(savedJobs.includes(parseInt(jobId, 10)));
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+        fetchUserData();
+    }, [jobId, setUser]);
+
+    // useEffect( () => {
+    //     setLoading(true);
+    //     axiosClient.get(`/jobs/${jobId}`)
+    //         .then( (response) => {
+    //             setJob(response.data);
+    //         }).catch((error) => {
+    //             console.error('There was an error fetching the job data:', error);
+    //         }).finally(() => {setLoading(false)});
+
+    //     axiosClient.get('/user')
+    //         .then(({data}) => {setUser(data)})
+
+    //     if (currentUser?.saved) {
+    //         const savedJobs = Array.isArray(currentUser.saved)
+    //             ? currentUser.saved
+    //             : JSON.parse(currentUser.saved || '[]');
+    //         setIsSaved(savedJobs.includes(jobId));
+    //     }
+
+    // }, [jobId, setUser, currentUser?.saved])
 
     const isJobOwner = currentUser && job && currentUser.id === job.user.id;
 
@@ -45,14 +83,36 @@ const SingleJobPage = () => {
     const handleApplyNow = () => {
         axiosClient.post(`/jobs/${jobId}/apply`)
             .then((response) => {
-                console.log(response.data.message)
+                alert(response.data.message)
             }).catch((error) => {
                 console.error("Error applying for the job:", error);
                 alert(error.response?.data?.message || "An error occurred while applying for the job.");
             });
     }
 
-    if (loading) {
+    const handleSaveJob = () => {
+        const savedJobs = Array.isArray(currentUser.saved)
+            ? currentUser.saved.map((id) => parseInt(id, 10))
+            : JSON.parse(currentUser.saved || '[]').map((id) => parseInt(id, 10))
+
+        const updatedSavedJobs = isSaved 
+            ? savedJobs.filter((id) => id != jobId) // removing from saved jobs
+            : [...savedJobs, parseInt(jobId, 10)] // adding to saved jobs
+
+            console.log("updated jobs: " + updatedSavedJobs)
+
+        axiosClient.put('/user/save-job', { saved: updatedSavedJobs })
+            .then( ({data}) => {
+                setIsSaved(!isSaved)
+                setUser(data.user)
+                console.log('saved jobs: ' + data.saved)
+            }).catch((error) => {
+                console.error("Error saving job:", error);
+                alert("An error occurred while saving the job.");
+            });
+    }
+
+    if (loading || !job) {
         return <h1 style={{margin:'20px', color:'white', fontSize:'1.5rem', fontWeight:'600'}}>Loading...</h1>;
     }
 
@@ -115,7 +175,9 @@ const SingleJobPage = () => {
                 </button>
                 ) 
             }
-            <button className={styles["save-btn"]}><FaBookmark/></button>
+            <button className={styles["save-btn"]} onClick={handleSaveJob}>
+                {isSaved ? <FaBookmark /> : <FaRegBookmark />}
+            </button>
         </div>
     </div>
   )

@@ -22,10 +22,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::get('/user/saved-jobs', [ListingController::class, 'saved_jobs']);
+    Route::put('/user/save-job', [ListingController::class, 'save_job']);
+
     Route::post('/jobs/store', [ListingController::class, 'store']);
     Route::get('/jobs/user-posts', [ListingController::class, 'manage_posts']);
     Route::put('/jobs/{id}/update', [ListingController::class, 'update']);
     Route::post('/jobs/{id}/apply', [JobApplicationController::class, 'apply_job']);
+    Route::get('jobs/applications', [JobApplicationController::class, 'applications']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 

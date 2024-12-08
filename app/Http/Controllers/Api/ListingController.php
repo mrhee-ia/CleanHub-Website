@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -44,15 +45,6 @@ class ListingController extends Controller
     }
 
     /**
-     * Show the form for creating a new job.
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created job in database.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -91,16 +83,6 @@ class ListingController extends Controller
     }
 
     /**
-     * Show the form for editing the specified job.
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified job in database.
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -132,6 +114,43 @@ class ListingController extends Controller
         $user = auth()->user();
         $jobs = Job::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
         return response()->json($jobs);
+    }
+
+    public function saved_jobs() {
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['message' => 'Please log in.'], 403);
+        }
+
+        $savedJobs = is_array($user->saved) ? $user->saved : json_decode($user->saved, true) ?? [];
+        $savedJobs = array_map('intval', $savedJobs);
+        
+        if (empty($savedJobs)) {
+            return response()->json(['saved_jobs' => []]);
+        }    
+
+        $jobs = Job::whereIn('id', $savedJobs)->get();
+
+        return response()->json([
+            'saved_jobs' => $jobs,
+        ]);
+    }
+
+    public function save_job(Request $request) {
+        $user = User::find(auth()->id());
+        if (!$user) {
+            return response()->json(['message' => 'Please log in.'], 403);
+        }
+
+        $validated = $request->validate(['saved' => 'array']);
+        $newSavedJobs = array_map('intval', $validated['saved'] ?? []);
+        $user->saved = $newSavedJobs;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Job saved successfully', 
+            'user' => $user->fresh(),
+            'saved' => $newSavedJobs]);
     }
 
     /**

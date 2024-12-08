@@ -18,7 +18,6 @@ const FeedPage = () => {
     axiosClient.get(`/jobs?category=${category}`)
       .then( response => {
         setJobs(response.data)
-        console.log(response.data)
       }).catch(error => {
         console.error("Error fetching jobs:", error);
       });

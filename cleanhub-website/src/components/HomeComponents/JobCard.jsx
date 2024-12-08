@@ -1,16 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
+import {useStateContext} from "../../context/ContextProvider.jsx"
+import axiosClient from "../../axios-client.js";
 import { Link } from 'react-router-dom'
 import styles from './Cards.module.css'
-import { FaBookmark, FaGlobeAmericas, FaRegMoneyBillAlt } from 'react-icons/fa'
+import { FaBookmark, FaRegBookmark, FaGlobeAmericas, FaRegMoneyBillAlt } from 'react-icons/fa'
 
 const JobCard = React.forwardRef(({ job, maxHeight }, ref) => {
+
+    const {currentUser, setUser} = useStateContext();
+    const [isSaved, setIsSaved] = useState(false);
+
+    useEffect( () => {
+        axiosClient.get('/user')
+            .then(({data}) => {
+                setUser(data)
+                const savedJobs = data.saved
+                setIsSaved(savedJobs.includes(job.id))
+            })
+    }, [job.id, setUser] )
+
+    const handleSaveJob = () => {
+        const savedJobs = Array.isArray(currentUser.saved)
+            ? currentUser.saved
+            : JSON.parse(currentUser.saved || '[]');
+        
+        const updatedSavedJobs = isSaved 
+            ? savedJobs.filter((id) => id != job.id) // removing from saved jobs
+            : [...savedJobs, job.id] // adding to saved jobs
+
+        axiosClient.put('/user/save-job', { saved: updatedSavedJobs })
+        .then( ({data}) => {
+            setIsSaved(!isSaved)
+            setUser(data.user)
+        }).catch((error) => {
+            console.error("Error saving job:", error);
+            alert("An error occurred while saving the job.");
+        });
+        
+    }
 
     const truncatedTitle = job.title.length > 60 ? job.title.substring(0, 60) + '...' : job.title;
 
   return (
     <div className={styles["jobcard"]}>
         <div>
-            <div className={styles['card-details']} ref={ref} style={{ height: maxHeight }} >
+            <div className={styles['card-details']} ref={ref} style={maxHeight > 0 ? {height:`${maxHeight}px`} : {}}>
                 <div>
                     <small className={styles['card-category']}>{job.category}</small>
                 </div>
@@ -22,7 +56,9 @@ const JobCard = React.forwardRef(({ job, maxHeight }, ref) => {
                 <small className={styles["card-location"]}><FaGlobeAmericas />{job.city_id}</small>
                 <div>
                     <button className={styles["card-view-btn"]}><Link to={`/hub/jobs/${job.id}`}>View</Link></button>
-                    <button className={styles["card-save-icon"]}><FaBookmark /></button>
+                    <button className={styles["card-save-icon"]} onClick={handleSaveJob}>
+                        { isSaved==true ? <FaBookmark /> : <FaRegBookmark />}
+                    </button>
                 </div>
             </div>
         </div>

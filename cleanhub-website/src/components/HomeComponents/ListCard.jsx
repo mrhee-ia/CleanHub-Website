@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import {useStateContext} from "../../context/ContextProvider.jsx"
 import styles from './Cards.module.css'
 import { FaHourglassHalf } from "react-icons/fa"
 
@@ -14,9 +15,8 @@ const formatDateTime = (dateString) => {
   return new Date(dateString).toLocaleString(undefined, options);
 };
 
-const ListCard = ({job}) => {
+const ListCard = ({job, postPage}) => {
 
-  // const isJobOwner = currentUser && job && currentUser.id === job.user.id;
   const truncatedTitle = job.title.length > 60 ? job.title.substring(0, 60) + '...' : job.title;
 
   return (
@@ -26,7 +26,8 @@ const ListCard = ({job}) => {
           <small className={job.application_status ? styles["status-open"] : styles["status-closed"]}>
             {job.application_status ? "Application Open" : "Application Closed"}
           </small>
-          {job.approved_status ? null : <small className={styles["status-pending"]}><FaHourglassHalf/>Pending...</small>}
+          {postPage ? 
+            (job.approved_status ? null : <small className={styles["status-pending"]}><FaHourglassHalf/>Pending...</small>) : null}
         </div>
         <small>{formatDateTime(job.created_at)}</small>
       </div>
@@ -35,7 +36,7 @@ const ListCard = ({job}) => {
       </div>
       <div className={styles["list-card-actions"]}>
         <Link to={`/hub/jobs/${job.id}`} className={styles["view-job-btn"]}>View Job</Link>
-        <Link className={styles["view-applicants-btn"]}>List of Applicants</Link>
+        {postPage && <Link className={styles["view-applicants-btn"]}>List of Applicants</Link>}
       </div>
     </div>
   )

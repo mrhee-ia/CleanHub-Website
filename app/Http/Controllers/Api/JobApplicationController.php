@@ -18,7 +18,7 @@ class JobApplicationController extends Controller
     public function apply_job(Request $request, $id) {
         $user = auth()->user();
         if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Please log in.'], 403);
         }
 
         $job = Job::findOrFail($id);
@@ -61,5 +61,20 @@ class JobApplicationController extends Controller
         }
 
         return response()->json(['message' => 'Job application successful'], 200);
+    }
+
+    public function applications(Request $request) {
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json(['message' => 'Please log in.'], 403);
+        }
+
+        $applications = json_decode($user->applications ?? '[]', true);
+        if (empty($applications)) {
+            return response()->json([]);
+        }
+
+        $jobs = Job::whereIn('id', $applications)->with('user')->get();
+        return response()->json($jobs);
     }
 }
