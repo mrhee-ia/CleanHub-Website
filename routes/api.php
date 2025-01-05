@@ -23,14 +23,25 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
+    Route::put('/user/update', [AuthController::class, 'update']);
+    Route::put('/user/profile-picture', [AuthController::class, 'updateProfilePicture']);
+
     Route::get('/user/saved-jobs', [ListingController::class, 'saved_jobs']);
     Route::put('/user/save-job', [ListingController::class, 'save_job']);
 
     Route::post('/jobs/store', [ListingController::class, 'store']);
     Route::get('/jobs/user-posts', [ListingController::class, 'manage_posts']);
     Route::put('/jobs/{id}/update', [ListingController::class, 'update']);
+    Route::patch('/jobs/{id}/update-status', [ListingController::class, 'update_status']);
     Route::post('/jobs/{id}/apply', [JobApplicationController::class, 'apply_job']);
     Route::get('jobs/applications', [JobApplicationController::class, 'applications']);
+    Route::get('jobs/{jobID}/applicants', [JobApplicationController::class, 'applicants']);
+    Route::post('/jobs/{jobID}/choose-applicants', [JobApplicationController::class, 'choose_applicants']);
+    Route::get('/jobs/{jobID}/chosen-applicants', [JobApplicationController::class, 'chosen_applicants']);
+    Route::post('/jobs/{jobID}/rate-applicants', [JobApplicationController::class, 'rate_applicants']);
+    Route::get('/jobs/{jobID}/rated-applicants', [JobApplicationController::class, 'rated_applicants']);
+    Route::get('/notifications', [JobApplicationController::class, 'notifications']);
+    Route::get('/history', [JobApplicationController::class, 'history']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

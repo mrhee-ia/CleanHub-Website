@@ -110,6 +110,18 @@ class ListingController extends Controller
         ], 200);
     }
 
+    public function update_status(Request $request, $id) {
+        $job = Job::findOrFail($id);
+        if ($request->has('jobStatus')) {
+            $job->application_status = $request->input('jobStatus');
+        }
+        if ($request->has('rated')) {
+            $job->rate_status = $request->input('rated');
+        }
+        $job->save();
+        return response()->json(['message' => 'Status updated successfully'], 200);
+    }
+
     public function manage_posts() {
         $user = auth()->user();
         $jobs = Job::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();

@@ -46,27 +46,6 @@ const SingleJobPage = () => {
         fetchUserData();
     }, [jobId, setUser]);
 
-    // useEffect( () => {
-    //     setLoading(true);
-    //     axiosClient.get(`/jobs/${jobId}`)
-    //         .then( (response) => {
-    //             setJob(response.data);
-    //         }).catch((error) => {
-    //             console.error('There was an error fetching the job data:', error);
-    //         }).finally(() => {setLoading(false)});
-
-    //     axiosClient.get('/user')
-    //         .then(({data}) => {setUser(data)})
-
-    //     if (currentUser?.saved) {
-    //         const savedJobs = Array.isArray(currentUser.saved)
-    //             ? currentUser.saved
-    //             : JSON.parse(currentUser.saved || '[]');
-    //         setIsSaved(savedJobs.includes(jobId));
-    //     }
-
-    // }, [jobId, setUser, currentUser?.saved])
-
     const isJobOwner = currentUser && job && currentUser.id === job.user.id;
 
     const handleCloseApplication = () => {

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import {useStateContext} from "../../context/ContextProvider.jsx"
 import styles from './Cards.module.css'
 import { FaHourglassHalf } from "react-icons/fa"
 
@@ -36,7 +35,8 @@ const ListCard = ({job, postPage}) => {
       </div>
       <div className={styles["list-card-actions"]}>
         <Link to={`/hub/jobs/${job.id}`} className={styles["view-job-btn"]}>View Job</Link>
-        {postPage && <Link className={styles["view-applicants-btn"]}>List of Applicants</Link>}
+        {postPage && 
+        <Link to={`/hub/jobs/${job.id}/applicants`} className={styles["view-applicants-btn"]}>List of Applicants</Link>}
       </div>
     </div>
   )
