@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SigninRequest;
 use App\Http\Requests\SignupRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -39,6 +40,51 @@ class AuthController extends Controller
 
         return response(compact('user', 'token'));
     }
+
+    public function update(Request $request) {
+        $user = $request->user();
+
+        $field = $request->input('field');
+        $value = $request->input('value');
+
+        $request->validate([
+            'field' => 'required|string|in:email,bio,location',
+            'value' => 'required|string|max:225',
+        ]);
+
+        $user->{$field} = $value;
+        $user->save();
+
+        return response()->json($user);
+    }
+
+    public function updateProfilePicture(Request $request)
+    {
+        /** @var \App\Models\User $user */
+
+        $request->validate([
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg|max:25600',
+        ]);
+
+        $user = $request->user();
+
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $filePath = $file->store('uploads/profile_pictures', 'public');
+
+            if ($user->profile_picture) {
+                Storage::disk('public')->delete($user->profile_picture);
+            }
+
+            $user->profile_picture = $filePath;
+            $user->save();
+
+            return response()->json($user);
+        }
+
+        return response()->json(['message' => 'No file uploaded'], 400);
+    }
+
 
     public function logout(Request $request) {
         /** @var \App\Models\User $user */

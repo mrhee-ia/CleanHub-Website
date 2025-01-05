@@ -36,7 +36,7 @@ function DefaultLayout() {
           <Link to='/'><h1>CleanHub</h1></Link>
         </div>
         <div className="h-profile-section">
-          <img src={profilePic3} alt="Profile Picture"/>
+          <img className="h-profile-picture" src={currentUser.profile_picture} alt="Profile Picture"/>
           <h3>{currentUser.full_name}</h3>
           <p><i>@{currentUser.user_name}</i></p>
         </div>

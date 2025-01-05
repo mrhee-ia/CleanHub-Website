@@ -86,6 +86,36 @@
     color: white;
 }
 
+/* PROFILE PAGE */
+
+.close-button {
+    background: none;
+    border: 1px solid var(--green-700);
+    border-radius: 4px;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--green-700);
+    margin-bottom: 6px;
+}
+
+.modal-input-div input, .modal-input-div textarea {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.modal-input-div button {
+    background-color: var(--green-600);
+    color: var(--custom-white);
+    width: 100%;
+    padding: 6px 0;
+    border-radius: 4px;
+    margin-top: 6px;
+}
+
+
+
+
 /* SINGLE JOB PAGE */
 
 .container {
@@ -309,3 +339,42 @@
 
 
 
+/*  APPLICANTS PAGE  */
+
+
+
+
+/* NOTIFICATIONS PAGE */
+
+.notif-card {
+    gap: 0.4rem;
+}
+
+.notif-title {
+    font-size: 1.4rem;
+}
+
+.notif-subtitle {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.notif-subtitle :first-child {
+    font-size: 7px;
+    color: var(--green-500);
+}
+
+.notif-card > div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    padding-top: 10px;
+    padding-right: 10px;
+    align-items: center;
+    border-top: 2px solid rgba(128, 128, 128, 0.2);
+}
+
+.notif-card > div > :first-child:hover {
+    color: var(--green-700);
+}
