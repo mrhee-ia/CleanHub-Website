@@ -88,6 +88,65 @@
 
 /* PROFILE PAGE */
 
+.profile-page {
+    overflow-y: auto;
+}
+
+.profile-info {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.profile-info > div > h2 {
+    color: var(--custom-white);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.profile-info > div > p {
+    color: var(--custom-white);
+}
+
+.profile-about {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.profile-about > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+    margin-right: 1rem;
+    width: 50%;
+}
+
+.profile-label {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--green-950);
+    text-shadow: -2px -1.2px 3px rgba(231, 229, 229, 0.6);
+}
+
+.profile-about > div > p {
+    color: var(--custom-white);
+    transition: all 0.2s ease-in-out;
+}
+
+.profile-about > div > p:hover {
+    padding: 6px 10px;
+    border: 1px solid var(--custom-white);
+    border-radius: 6px;
+    box-shadow: 3px 3px 5px rgba(4, 37, 18, 0.5);
+}
+
+.profile-about > div > div {
+    border: 1px solid var(--green-900);
+    width: 40%;
+}
+
 .close-button {
     background: none;
     border: 1px solid var(--green-700);
@@ -111,6 +170,66 @@
     padding: 6px 0;
     border-radius: 4px;
     margin-top: 6px;
+}
+
+.profile-history {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(16px);
+    background: var(--green-950);
+    border-radius: 1rem;
+    margin: 0 0.8rem 1rem 0.4rem;
+    padding: 1.2rem;
+    max-height: 100%;
+}
+
+.profile-history h3 {
+    color: var(--custom-white); 
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.history-list-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 80vh;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding: 1rem 0.5rem;
+}
+
+.history-list-container > div {
+    background-color: var(--custom-white);
+    padding: 12px 16px;
+    border-radius: 0.6rem;
+}
+
+.history-list > :first-child{
+    font-size: large;
+    font-weight: 500;
+}
+
+.history-list > div {
+    border-top: 2px solid rgba(128, 128, 128, 0.2);
+    margin-top: 4px;
+    padding-top: 6px;
+}
+
+.history-list > div > span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.history-list > div > span > :first-child {
+    color: var(--green-700);
+    font-size: small;
+}
+
+.history-stars {
+    color: var(--green-600);
+    font-size: smaller;
 }
 
 
@@ -227,6 +346,9 @@
   box-shadow: 4px 4px 20px 0 var(--green-800);
 }
 
+
+
+
 /* JOB POSTS PAGE */
 
 .post-bar-section {
@@ -256,8 +378,6 @@
     color: var(--green-800);
     box-shadow: 3px 3px 5px rgba(4, 37, 18, 0.6);
 }
-
-
 
 .post-form {
     display: flex;
@@ -341,6 +461,69 @@
 
 /*  APPLICANTS PAGE  */
 
+.selection-form {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow-y: auto;
+    gap: 1rem;
+}
+
+.applicants-selection input {
+    margin-right: 6px;
+    accent-color: var(--green-500);
+    color: var(--green-500);
+}
+
+.selection-form-btn {
+    color: var(--custom-white);
+    font-size: larger;
+    font-weight: 600;
+    margin: 1rem;
+    background: var(--gradient-green);
+    padding: 1rem 2rem;
+    border: 2px solid var(--green-950);
+    border-radius: 1rem;
+    box-shadow: -6px 6px 10px rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease-in-out;
+}
+
+.selection-form-btn:hover {
+    color: var(--green-950);
+    background: var(--custom-white);
+    box-shadow: 6px 6px 10px rgba(4, 37, 18, 0.6);
+}
+
+.applicants-ratings input {
+    margin-right: 16px;
+    accent-color: var(--green-500);
+    color: var(--green-800);
+    border-radius: 6px;
+}
+
+
+/*  PROCESSED APPLICANTS */
+
+.not-chosen {
+    opacity: 70%;
+}
+
+.ratings {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+}
+
+.ratings > :first-child {
+    color: var(--green-800);
+    font-size: x-large;
+}
+
+.ratings > :not(:first-child) {
+    color: var(--green-600);
+    font-size: large;
+    margin-left: 5px;
+}
 
 
 

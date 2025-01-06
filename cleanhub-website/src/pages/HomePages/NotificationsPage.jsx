@@ -27,7 +27,6 @@ const NotificationsPage = () => {
     .then(
       ({data}) => {setNotifications(data || [])}
     ).catch((error) => {console.error("Error fetching notifications:", error)})
-    console.log(notifications)
   }, [])
 
   return (

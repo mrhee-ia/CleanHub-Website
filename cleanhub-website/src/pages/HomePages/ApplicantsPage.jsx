@@ -73,14 +73,18 @@ const ApplicantsPage = () => {
   return (
     <>
       <div className={styles["header-section"]}>
-        <PageTitle title="Applicants" subtitle="Manage job applicants." />
+      {
+        jobStatus === 1 && rated === 0 && <PageTitle title="Applicants" subtitle="Employer, please select qualified applicants for this job:" />
+      }
+      {
+        jobStatus == 0 && rated == 0 && <PageTitle title="Applicants" subtitle="Employer, please rate the applicants based on their work performance:" />
+      }
       </div>
-      <div>
+      <div className={style['list-container']}>
         {jobStatus === 1 && rated === 0 ? (
-          <form onSubmit={handleApplicantsSubmit} className={style['list-container']}>
-            <h1 style={{margin:'20px', color:'white', fontSize:'1.2rem', fontWeight:'500'}}>Select Qualified Applicants</h1>
+          <form onSubmit={handleApplicantsSubmit} className={styles['selection-form']}>
             {applicants.map((applicant) => (
-              <div key={applicant.id} className={`${style['jobcard']} ${style['listcard']}`}>
+              <div key={applicant.id} className={`${style['jobcard']} ${style['listcard']} ${styles['applicants-selection']}`}>
                 <label>
                   <input
                     type="checkbox"
@@ -93,16 +97,14 @@ const ApplicantsPage = () => {
                 </label>
               </div>
             ))}
-            <button type="submit" className={styles['applyNow-btn']}>Submit Selection</button>
+            <button type="submit" className={styles['selection-form-btn']}>SUBMIT SELECTION</button>
           </form>
-        ) : 
+        ) :
           (jobStatus == 0 && rated == 0 ? (
           <div className={style['list-container']}>
-            <h1 style={{margin:'20px', color:'white', fontSize:'1.2rem', fontWeight:'500'}}>Rate Applicants</h1>
             {chosenApplicants.map((applicant) => (
-              <div key={applicant.id} className={`${style['jobcard']} ${style['listcard']}`}>
+              <div key={applicant.id} className={`${style['jobcard']} ${style['listcard']} ${styles['applicants-ratings']}`}>
                 <label>
-                  {applicant.full_name} <i><small>(@{applicant.user_name})</small></i>
                   <input
                     type="number"
                     min="1"
@@ -110,11 +112,12 @@ const ApplicantsPage = () => {
                     value={ratings[applicant.id] || ""}
                     onChange={(e) => handleRatingChange(applicant.id, e.target.value)}
                   />
+                  {applicant.full_name} <i><small>(@{applicant.user_name})</small></i>
                 </label>
               </div>
             ))}
-            <button type="button" className={styles['applyNow-btn']} onClick={handleRatingsSubmit}>
-              Submit Ratings
+            <button type="button" className={styles['selection-form-btn']} onClick={handleRatingsSubmit}>
+              SUBMIT RATINGS
             </button>
           </div>) : <Navigate to={`/hub/jobs/${jobId}/processed-applicants`} />)
         }

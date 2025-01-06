@@ -4,7 +4,8 @@ import axiosClient from "../../axios-client";
 import {useStateContext} from "../../context/ContextProvider.jsx"
 import Modal from "../../components/HomeComponents/Modal"
 import styles from './HomePages.module.css'
-import { FaRegTimesCircle } from "react-icons/fa";
+import { FaUserFriends, FaMedal, FaStar } from "react-icons/fa";
+import profilePic3 from '../../assets/images/profilePic3.avif'
 
 
 const ProfilePage = () => {
@@ -82,40 +83,51 @@ const ProfilePage = () => {
   return (
     <div className={styles['profile-page']}>
       <div className={styles['profile-info']}>
-        <img 
-          className="h-profile-picture" 
-          src={currentUser.profile_picture} 
-          alt="Upload Profile Picture" 
-          onClick={() => handleEdit("profile_picture")} />
         <div>
           <h2>{currentUser.full_name}</h2>
-          <p><i>{currentUser.user_name}</i></p>
+          <p><i>Username: {currentUser.user_name}</i></p>
         </div>
+        <img 
+          className="h-profile-picture" 
+          src={profilePic3} 
+          alt="Upload Profile Picture" 
+          onClick={() => handleEdit("profile_picture")} />
       </div>
       <div className={styles['profile-about']}>
-        <p onClick={() => handleEdit("email")}>{currentUser.email}</p>
-        <p onClick={() => handleEdit("bio")}>{currentUser.bio || "Add your bio"}</p>
-        <p onClick={() => handleEdit("location")}>{currentUser.location || "Add your location"}</p>
+        <div>
+          <label htmlFor="" className={styles['profile-label']}>Email</label>
+          <div></div>
+          <p onClick={() => handleEdit("email")}>{currentUser.email}</p>
+          <label htmlFor="" className={styles['profile-label']}>Location</label>
+          <div></div>
+          <p onClick={() => handleEdit("location")}>{currentUser.location || "Add your location"}</p>
+        </div>
+        <div>
+          <label htmlFor="" className={styles['profile-label']}>Bio</label>
+          <div></div>
+          <p onClick={() => handleEdit("bio")}>{currentUser.bio || "Add your bio"}</p>
+        </div>
       </div>
-      {
-        jobHistory.length > 0 ? (
-          <div className={styles['profile-history']}>
-            <h3>Job History</h3>
-            <ul>
-              {jobHistory.map((job) => (
-                <li key={job.job_id}>
-                  <Link to={`/hub/jobs/${job.job_id}`}>{job.job_title}</Link>
-                  <div></div>
-                  <div>
-                    <span>Employer: {job.employer_name}</span>
-                    <span>Rating: {job.user_rating}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+      <div className={styles['profile-history']}>
+        <h3>Job History</h3>
+        {jobHistory.length > 0 && (
+          <div className={styles['history-list-container']}>
+            {jobHistory.map((job) => (
+              <div key={job.job_id} className={styles['history-list']}>
+                <Link to={`/hub/jobs/${job.job_id}`}>{job.job_title}</Link>
+                <div>
+                  <span><FaUserFriends/> Employer: {job.employer_name}</span>
+                  <span><FaMedal/> Rating:
+                    {[...Array(Number(job.user_rating))].map((_, index) => (
+                      <FaStar className={styles['history-stars']} key={index} />
+                    ))}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
-        ) : null
-      }
+        )}
+      </div>
       {/* MODAL */}
       {
         isModalOpen && (
