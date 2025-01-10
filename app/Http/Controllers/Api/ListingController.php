@@ -15,20 +15,28 @@ class ListingController extends Controller
      */
     public function index(Request $request)
     {
+
         $category = $request->query('category', 'All');
-        
-        if ($category == 'All') {
-            $jobs = Job::where('application_status', 1)
-            ->where('approved_status', 1)
-            ->orderBy('created_at', 'desc')
-            ->get();
-        } else {
-            $jobs = Job::where('category', $category)
-            ->where('approved_status', 1)
-            ->where('application_status', 1)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $search = $request->query('search', null);
+
+        $query = Job::where('approved_status', 1)->where('application_status', 1);
+
+        if ($category != 'All') {
+            $query->where('category', $category);
         }
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%$search%")
+                ->orWhere('description', 'LIKE', "%$search%")
+                ->orWhere('qualifications', 'LIKE', "%$search%")
+                ->orWhere('city_id', 'LIKE', "%$search%")
+                ->orWhere('full_address', 'LIKE', "%$search%");
+            });
+        }
+
+        $jobs = $query->orderBy('created_at', 'desc')->get();
+
         return response()->json($jobs);
     }
 

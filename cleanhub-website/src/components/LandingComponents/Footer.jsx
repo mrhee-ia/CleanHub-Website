@@ -43,10 +43,10 @@ const Footer = () => {
             <div className={`${styles['footer-section']} ${styles['socialMedia']}`}>
                 <h4>Follow Us</h4>
                 <div className={styles["social-icons"]}>
-                    <Link to=''><FaFacebook></FaFacebook></Link>
-                    <Link to=''><FaTwitter></FaTwitter></Link>
-                    <Link to=''><FaInstagram></FaInstagram></Link>
-                    <Link to=''><FaLinkedin></FaLinkedin></Link>
+                    <a target="_blank" rel="noopener noreferrer" href='https://www.facebook.com/ma.cristina.pasague/'><FaFacebook/></a>
+                    <a target="_blank" rel="noopener noreferrer" href='https://x.com/mria_louella?t=Lf7YgXm7R8LsnqJdtTbg4w&s=09'><FaTwitter/></a>
+                    <a target="_blank" rel="noopener noreferrer" href='https://www.instagram.com/mriasteena/'><FaInstagram/></a>
+                    <a target="_blank" rel="noopener noreferrer" href='https://www.linkedin.com/login'><FaLinkedin/></a>
                 </div>
             </div>
         </div>

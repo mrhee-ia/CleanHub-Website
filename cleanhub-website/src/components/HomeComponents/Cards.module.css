@@ -180,3 +180,69 @@
 
 
 
+/* ----------------CardsContainer------------------------ */
+
+/* Adjust grid layout for smaller screens */
+@media (max-width: 1024px) {
+    .job-cards-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .job-cards-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ----------------Cards------------------------ */
+
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-view-btn {
+        font-size: x-small;
+        padding: 0.2rem 0.6rem;
+    }
+}
+
+/* ----------------Lists------------------------ */
+
+@media (max-width: 768px) {
+    .list-job-info span {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .list-card-actions > * {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+/* ----------------General Media Queries------------------------ */
+
+@media (max-width: 1024px) {
+    .jobcard {
+        padding: 0.8rem;
+    }
+
+    .list-container {
+        padding: 0.8rem 0.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .jobcard {
+        padding: 0.6rem;
+    }
+
+    .list-container {
+        padding: 0.6rem 0.3rem;
+    }
+}

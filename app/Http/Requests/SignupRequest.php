@@ -31,7 +31,7 @@ class SignupRequest extends FormRequest
                 'string',
                 'max:255',
                 'unique:users,user_name',
-                'regex:/^[a-zA-Z0-9_-.]+$/'
+                'regex:/^[a-zA-Z0-9_.-]+$/'
             ],
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => ['required', Password::min(8)->letters()->symbols()]

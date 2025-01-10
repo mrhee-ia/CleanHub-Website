@@ -115,6 +115,7 @@ class JobApplicationController extends Controller
                 'user_id' => $applicant_id,
                 'job_id' => $jobID,
                 'message' => "Congratulations!",
+                'notification_type' => 3,
                 'created_at' => now(),
             ];
         }
@@ -155,7 +156,7 @@ class JobApplicationController extends Controller
         $notifications = DB::table('notifications')
             ->join('jobs', 'notifications.job_id', '=', 'jobs.id')
             ->where('notifications.user_id', $user->id)
-            ->select('notifications.*', 'jobs.title as job_title')
+            ->select('notifications.*', 'jobs.title as job_title', 'notifications.notification_type')
             ->orderBy('notifications.created_at', 'desc')
             ->get();
     

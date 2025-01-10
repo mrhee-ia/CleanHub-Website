@@ -4,7 +4,8 @@ import '../../index.css'
 import styles from './Guides.module.css'
 import SignupImg from '../../assets/images/User-Account-Sign-up.svg'
 import ProfileImg from '../../assets/images/Profile-details.svg'
-import UIicon from '../../assets/images/UI-icon.png'
+import UIicon from '../../assets/images/UI-icon.avif'
+import UIicon2 from '../../assets/images/UI-icon2.jpg'
 
 const Guide = () => {
   return (
@@ -55,24 +56,21 @@ const Guide = () => {
                             <p>Step 3:</p>
                             <span style={{fontWeight:'600'}}>RECRUITING? CREATE A POST!</span>
                         </div>
-                        <img src={UIicon} className={styles['UI-icon-title']} />
+                        <img src={UIicon2} className={styles['UI-icon-title']} />
                     </div>
                     <div className={styles['grid']}>
-                        <img src={UIicon} className={styles['UI-icon']} />
+                        <img src={UIicon2} className={styles['UI-icon']} />
                         <span>Click the 'Post a Job' and fill in job details including location, description, pay rate, and schedule.</span>
                     </div>
                     <div className={styles['grid']}>
-                        <img src={UIicon} className={styles['UI-icon']} />
+                        <img src={UIicon2} className={styles['UI-icon']} />
                         <span>Specify qualifications or preferences to find the right cleaner.</span>
                     </div>
                     <div className={styles['grid']}>
-                        <img src={UIicon} className={styles['UI-icon']} />
-                        <span>Decide how long the post will be up and choose visibility whether public or limited to a certain group.</span>
+                        <img src={UIicon2} className={styles['UI-icon']} />
+                        <span>Select the most qualified applicants and rate them after according to their job performance.</span>
                     </div>
                 </div>
-                {/* <div className={`${styles['carousel-slide']} ${styles['slide5']}`}>
-                    slide 5
-                </div> */}
             </Carousel>
 
         </div>

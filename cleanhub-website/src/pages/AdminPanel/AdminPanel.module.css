@@ -1,0 +1,69 @@
+.adminPanel {
+    padding: 20px;
+    height: 100vh;
+    backdrop-filter: blur(16px);
+    background: var(--gradient-green);
+    color: var(--custom-white);
+}
+
+.adminPanel h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.admin-section {
+    padding: 1rem;
+    margin: 1.5rem;
+    border-radius: 6px;
+    backdrop-filter: blur(16px);
+    background: var(--gradient-green);
+    box-shadow: 3px 3px 5px rgba(4, 37, 18, 0.9);
+    height: 37vh;
+    overflow-y: auto;
+}
+
+.admin-section h2 {
+    font-size: large;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.post {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.adminPanel button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.approveButton {
+    background-color: #4caf50;
+    color: white;
+}
+
+.denyButton {
+    background-color: #f44336;
+    color: white;
+}
+
+.deleteButton {
+    background-color: #f44336;
+    color: white;
+}
+
+.admin-logout {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+  

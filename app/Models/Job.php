@@ -21,6 +21,7 @@ class Job extends Model
         'payment',
         'media_paths',
         'application_status',
+        'approved_status'
     ];
 
     protected $casts = [

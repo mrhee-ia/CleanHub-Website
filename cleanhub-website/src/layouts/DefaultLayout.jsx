@@ -13,6 +13,12 @@ function DefaultLayout() {
     return <Navigate to='/join-now' />
   }
 
+  useEffect(() => {
+    if (currentUser.role == 'admin') {
+      return <Navigate to='/admin-panel' />
+    }
+  }, [])
+
   const onLogout = (event) => {
     event.preventDefault()
     axiosClient.post('/logout')
@@ -22,13 +28,6 @@ function DefaultLayout() {
       })
   }
 
-  useEffect(() => {
-    axiosClient.get('/user')
-      .then(({data}) => {
-        setUser(data)
-      })
-  }, [])
-
   return (
     <div className="homepage-container bg-gradient-green">
       <aside className="h-sidebar">
@@ -37,8 +36,10 @@ function DefaultLayout() {
         </div>
         <div className="h-profile-section">
           <img className="h-profile-picture" src={profilePic3} alt="Profile Picture"/>
-          <h3>{currentUser.full_name}</h3>
-          <p><i>@{currentUser.user_name}</i></p>
+          <div>
+            <h3>{currentUser.full_name}</h3>
+            <p><i>@{currentUser.user_name}</i></p>
+          </div>
         </div>
         <nav className="h-navigation-links">
           <ul>

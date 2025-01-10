@@ -48,26 +48,28 @@ const ProfilePage = () => {
     setSelectedFile(event.target.files[0]);
   }
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = async (event) => {
     event.preventDefault()
     if (!selectedFile) {
       alert("Please select a file to upload.");
       return;
     }
-    const formData = new FormData();
-    formData.append('profile_picture', selectedFile);
+    const payload = new FormData();
+    payload.append("profile_picture", selectedFile);
   
-    axiosClient.put(`/user/profile-picture`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    }).then(({ data }) => {
-        setUser(data);
-        handleCloseModal();
-      })
-      .catch((error) => {
-        console.error("Error uploading profile picture:", error);
+    try {
+      const response = await axiosClient.put('/user/profile-picture', payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Explicitly set this
+        },
       });
+  
+      setUser(response.data); // Update the user state with the new data
+      handleCloseModal();     // Close the modal
+    } catch (error) {
+      console.error("Error uploading profile picture:", error.response?.data || error.message);
+    }
+
   };  
 
   const handleEdit = (field) => {
@@ -134,11 +136,11 @@ const ProfilePage = () => {
           <Modal>
             <button className={styles["close-button"]} onClick={handleCloseModal}>&times;</button>
             {modalContent == 'profile_picture' && (
-              <div className={styles["modal-input-div"]}>
+              <form className={styles["modal-input-div"]} onSubmit={handleFileUpload}>
                 <h3>Upload Profile Picture</h3>
-                <input type="file" onChange={handleFileChange}/>
-                <button onClick={handleFileUpload}>Upload</button>
-              </div>
+                <input type="file" name="profile_picture" onChange={handleFileChange}/>
+                <button type="submit">Upload</button>
+              </form>
             )}
             {modalContent == 'email' && (
               <div className={styles["modal-input-div"]}>

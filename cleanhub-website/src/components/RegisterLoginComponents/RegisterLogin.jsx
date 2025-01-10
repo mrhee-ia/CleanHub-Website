@@ -1,5 +1,5 @@
 import { createRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axiosClient from '../../axios-client';
 import { useStateContext } from '../../context/ContextProvider';
 import styles from './RegisterLogin.module.css'
@@ -50,6 +50,7 @@ const RegisterLogin = () => {
   const { setUser, setToken } = useStateContext();
   const [errors, setErrors] = useState(null);
   const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   const onSignup = (event) => {
     event.preventDefault()
@@ -83,6 +84,9 @@ const RegisterLogin = () => {
             // successful response
             setUser(data.user)
             setToken(data.token)
+            if (data.user.role == "admin") {
+                navigate('/admin-panel');
+            }
         }).catch((err) => {
             const response = err.response;
             if (response && response.status === 422) setMessage(response.data.message)

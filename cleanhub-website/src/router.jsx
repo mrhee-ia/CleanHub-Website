@@ -1,8 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import DefaultLayout from "./layouts/defaultLayout";
+import DefaultLayout from "./layouts/DefaultLayout";
 import LandingPage from "./pages/LandingPages/LandingPage"
 import AboutPage from "./pages/LandingPages/AboutPage"
 import HelpPage from "./pages/LandingPages/HelpPage"
+import JobsPage from "./pages/LandingPages/JobsPage";
 import RegisterLoginPage from "./pages/LandingPages/RegisterLoginPage"
 import FeedPage from "./pages/HomePages/FeedPage"
 import ProfilePage from "./pages/HomePages/ProfilePage"
@@ -14,6 +15,7 @@ import SingleJobPage from "./pages/HomePages/SingleJobPage";
 import CreateJobPage from "./pages/HomePages/CreateJobPage"
 import ApplicantsPage from "./pages/HomePages/ApplicantsPage"
 import ProcessedApplicants from "./pages/HomePages/ProcessedApplicants";
+import AdminPanel from "./pages/AdminPanel/AdminPanel";
 
 
 const router = createBrowserRouter([
@@ -83,10 +85,14 @@ const router = createBrowserRouter([
         path: '/help',
         element: <HelpPage />
     },
-    // {
-    //     path: '*',
-    //     element: <NotFound />
-    // }
+    {
+        path: '/jobs-landing',
+        element: <JobsPage/>
+    },
+    {
+        path: '/admin-panel',
+        element: <AdminPanel/>
+    },
 ])
 
 export default router;

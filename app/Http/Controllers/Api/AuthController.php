@@ -9,6 +9,8 @@ use App\Http\Requests\SigninRequest;
 use App\Http\Requests\SignupRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
 
 class AuthController extends Controller
 {
@@ -38,7 +40,19 @@ class AuthController extends Controller
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
 
-        return response(compact('user', 'token'));
+        return response()->json([
+            'user' => $user,
+            'role' => $user->role,
+            'token' => $token,
+        ]);
+    }
+
+    public function isAdmin(Request $request) {
+        $user = $request->user();
+        if ($user->role == 'admin') {
+            return response()->json(['message' => 'Admin Access'], 200);
+        }
+        return response()->json(['message' => 'Forbidden'], 403);
     }
 
     public function update(Request $request) {
@@ -60,17 +74,23 @@ class AuthController extends Controller
 
     public function updateProfilePicture(Request $request)
     {
-        /** @var \App\Models\User $user */
 
         $request->validate([
             'profile_picture' => 'required|image|mimes:jpeg,png,jpg|max:25600',
         ]);
 
+        if ($request->hasFile('profile_picture')) {
+            Log::info('Profile picture uploaded');
+        } else {
+            Log::info('No file uploaded');
+        }
+
+        /** @var \App\Models\User $user */
         $user = $request->user();
 
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
-            $filePath = $file->store('uploads/profile_pictures', 'public');
+            $filePath = $file->store('profile_pictures', 'public');
 
             if ($user->profile_picture) {
                 Storage::disk('public')->delete($user->profile_picture);

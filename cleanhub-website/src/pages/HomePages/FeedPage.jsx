@@ -11,20 +11,36 @@ const FeedPage = () => {
     'All', 'Home Cleanup', 'Vacation Home Cleanup', 'Office Cleanup', 'Community Cleanup', 'Other Cleanup'
   ]
   
-  const [category, setCategory] = useState("All");
   const [jobs, setJobs] = useState([])
+  const [searchTerm, setSearchTerm] = useState("");
+  const [category, setCategory] = useState("All");
 
-  useEffect( () => {
-    axiosClient.get(`/jobs?category=${category}`)
-      .then( response => {
-        setJobs(response.data)
-      }).catch(error => {
+  useEffect(() => {
+    fetchJobs();
+  }, [category, searchTerm]);
+
+  const fetchJobs = () => {
+    axiosClient
+      .get(`/jobs`, {
+        params: {
+          category: category == "All" ? null : category,
+          search: searchTerm,
+        },
+      })
+      .then((response) => {
+        setJobs(response.data);
+      })
+      .catch((error) => {
         console.error("Error fetching jobs:", error);
       });
-  }, [category])
+  };
 
   const handleChangeCategory = (newCategory) => {
     setCategory(newCategory)
+  }
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
   }
 
   return (
@@ -35,8 +51,7 @@ const FeedPage = () => {
         {/* <!-- Search Bar with Filters --> */}
         <section className={styles["search-bar-section"]}>
           <div className={styles["search-bar"]}>
-            <input type="text" placeholder="Type anything to search..." />
-            <button className={styles["filter-button"]}><FaSearch className={styles["filter-icon"]}/></button>
+            <input type="text" placeholder="Type anything to search..." value={searchTerm} onChange={handleSearch} /><button className={styles["filter-button"]}><FaSearch className={styles["filter-icon"]}/></button>
           </div>
         </section>
       </div>

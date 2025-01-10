@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import {useStateContext} from "../../context/ContextProvider.jsx"
 import axiosClient from "../../axios-client.js";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './Cards.module.css'
 import { FaBookmark, FaRegBookmark, FaGlobeAmericas, FaRegMoneyBillAlt } from 'react-icons/fa'
 
 const JobCard = React.forwardRef(({ job, maxHeight }, ref) => {
 
-    const {currentUser, setUser} = useStateContext();
+    const {currentUser, setUser, token} = useStateContext();
     const [isSaved, setIsSaved] = useState(false);
+    const navigate = useNavigate();
 
     useEffect( () => {
         axiosClient.get('/user')
@@ -20,6 +21,11 @@ const JobCard = React.forwardRef(({ job, maxHeight }, ref) => {
     }, [job.id, setUser] )
 
     const handleSaveJob = () => {
+
+        if (!token) {
+            navigate('/join-now')
+        }
+
         const savedJobs = Array.isArray(currentUser.saved)
             ? currentUser.saved
             : JSON.parse(currentUser.saved || '[]');
@@ -34,7 +40,6 @@ const JobCard = React.forwardRef(({ job, maxHeight }, ref) => {
             setUser(data.user)
         }).catch((error) => {
             console.error("Error saving job:", error);
-            alert("An error occurred while saving the job.");
         });
         
     }

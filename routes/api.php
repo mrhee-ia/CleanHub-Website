@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\ListingController;
+use App\Http\Controllers\Api\HelpRequestController;
 use App\Http\Controllers\Api\JobApplicationController;
 
 /*
@@ -16,6 +18,15 @@ use App\Http\Controllers\Api\JobApplicationController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::middleware('auth:sanctum', 'isAdmin')->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index']);
+    Route::get('/admin/manage-posts', [AdminController::class, 'managePosts']);
+    Route::put('/admin/approve-post/{id}', [AdminController::class, 'approvePost']);
+    Route::post('/admin/deny-post/{id}', [AdminController::class, 'denyPost']);
+    Route::delete('/admin/delete-post/{id}', [AdminController::class, 'deletePost']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -42,6 +53,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/jobs/{jobID}/rated-applicants', [JobApplicationController::class, 'rated_applicants']);
     Route::get('/notifications', [JobApplicationController::class, 'notifications']);
     Route::get('/history', [JobApplicationController::class, 'history']);
+
+    Route::post('/help-requests', [HelpRequestController::class, 'store']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

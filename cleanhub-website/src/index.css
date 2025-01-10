@@ -123,3 +123,146 @@
   display: flex;
   flex-direction: column;
 }
+
+
+.job-landing-container {
+  height: 100vh;
+  padding: 1rem;
+}
+
+/*======== IPAD PRO ==========*/
+@media only screen and (min-width: 835px) and (max-width: 1030px) {
+  .homepage-container {
+    flex-direction: column;
+  }
+
+  .h-sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-right: none;
+    border-bottom: rgba(204, 204, 204, 0.2) solid 1px;
+  }
+
+  .h-profile-section {
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+  }
+
+  .h-profile-section > div {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .h-profile-picture {
+    width: 60px;
+    height: 60px;
+    margin: 0 10px 0 0;
+  }
+
+  .h-navigation-links {
+    display: none; /* Hide links on medium screens unless toggled */
+  }
+
+  .h-main-container {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/*========== iPAD ==========*/
+@media only screen and (min-width: 700px) and (max-width: 835px) {
+  .homepage-container {
+    flex-direction: column;
+  }
+
+  .h-sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    border-right: none;
+    border-bottom: rgba(204, 204, 204, 0.2) solid 1px;
+  }
+
+  .h-profile-section {
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  .h-navigation-links {
+    display: none; /* Hide links on smaller tablets unless toggled */
+  }
+
+  .h-main-container {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/*======== MOBILE ==========*/
+@media only screen and (min-width: 350px) and (max-width: 700px) {
+  .homepage-container {
+    flex-direction: column;
+  }
+
+  .h-sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-right: none;
+    border-bottom: rgba(204, 204, 204, 0.2) solid 1px;
+  }
+
+  .h-profile-section {
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  .h-profile-picture {
+    width: 50px;
+    height: 50px;
+  }
+
+  .h-navigation-links {
+    display: none; /* Use a toggle menu for navigation links */
+  }
+
+  .h-main-container {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Toggle button for smaller screens (Optional) */
+.toggle-menu {
+  display: none;
+}
+
+@media only screen and (max-width: 835px) {
+  .toggle-menu {
+    display: block;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    margin: 10px;
+  }
+
+  .h-navigation-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .h-navigation-links ul {
+    flex-direction: column;
+  }
+}
