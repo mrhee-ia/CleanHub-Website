@@ -165,10 +165,9 @@ class JobApplicationController extends Controller
     
 
     public function history() {
-        
         $user = auth()->user();
         $userID = $user->id;
-
+    
         $jobHistory = DB::table('job_applications')
             ->join('jobs', 'job_applications.job_id', '=', 'jobs.id')
             ->join('users as employers', 'jobs.user_id', '=', 'employers.id')
@@ -179,16 +178,16 @@ class JobApplicationController extends Controller
                 'employers.full_name as employer_name',
                 'job_applications.ratings'
             )
-            ->whereRaw("JSON_CONTAINS(job_applications.chosen_applicants, $userID)")
+            ->whereRaw("JSON_CONTAINS(job_applications.chosen_applicants, ?)", [json_encode((string) $userID)])
             ->get();
-
+    
         $jobHistory = $jobHistory->map(function ($job) use ($userID) {
             $ratings = json_decode($job->ratings, true);
             $job->user_rating = isset($ratings[$userID]) ? $ratings[$userID] : null;
             return $job;
         });
-
+    
         return response()->json($jobHistory);
-    }
+    }    
 
 }
