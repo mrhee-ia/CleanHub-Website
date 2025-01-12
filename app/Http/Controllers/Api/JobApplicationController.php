@@ -178,7 +178,7 @@ class JobApplicationController extends Controller
                 'employers.full_name as employer_name',
                 'job_applications.ratings'
             )
-            ->whereRaw("JSON_CONTAINS(job_applications.chosen_applicants, ?)", [json_encode((string) $userID)])
+            ->whereRaw("JSON_CONTAINS(job_applications.chosen_applicants, ?)", [json_encode($userID)])
             ->get();
     
         $jobHistory = $jobHistory->map(function ($job) use ($userID) {
