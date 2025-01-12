@@ -68,7 +68,7 @@ class ListingController extends Controller
             'full_address' => 'required',
             'schedule' => 'required',
             'payment' => 'required',
-            'media_paths.*' => 'required|file|mimes:jpg,jpeg,png|max:25600',
+            'media_paths.*' => 'required|file|mimes:jpg,jpeg,png|max:102400',
         ]);
 
         $mediaPaths = [];
