@@ -48,7 +48,9 @@ class ListingController extends Controller
     public function show($id)
     {
         $job = Job::with('user')->findOrFail($id);
-        $job->media_paths = json_decode($job->media_paths);
+        $job->media_paths = array_map(function ($path) {
+            return asset("storage/$path");
+        }, json_decode($job->media_paths, true) ?? []);
         return response()->json($job);
     }
 
