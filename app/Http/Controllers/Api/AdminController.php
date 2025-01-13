@@ -74,8 +74,6 @@ class AdminController extends Controller
             return response()->json(['message' => 'Job not found or not approved'], 404);
         }
 
-        $job->delete();
-
         $notification = [
             'user_id' => $job->user_id,
             'job_id' => $job->id,
@@ -83,6 +81,8 @@ class AdminController extends Controller
             'notification_type' => 3,
         ];
         DB::table('notifications')->insert($notification);
+
+        $job->delete();
 
         return response()->json(['message' => 'Job deleted and notification sent'], 200);
     }
